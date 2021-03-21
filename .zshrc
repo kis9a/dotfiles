@@ -76,11 +76,5 @@ function ff() {
   cd $baseDir/$dir
 }
 
-function m() {
-  baseDir=$MEMOS
-  memo=$(fd -t f --base-directory $baseDir | fzf)
-  bat $baseDir/$memo
-}
-
 # alias
 source ~/.aliases;

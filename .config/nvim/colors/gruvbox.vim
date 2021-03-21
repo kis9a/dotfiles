@@ -11,20 +11,40 @@ endif
 
 let g:colors_name='gruvbox'
 
+function! s:HL(group, fg, ...) 
+" Arguments: group, guifg, guibg, gui, guisp
+  let fg = a:fg
+  if a:0 >= 1
+    let bg = a:1
+  else
+    let bg = s:none
+  endif
+  if a:0 >= 2 && strlen(a:2)
+    let emstr = a:2
+  else
+    let emstr = 'NONE,'
+  endif
+  let histring = [ 'hi', a:group,
+        \ 'guifg=' . fg[0], 'ctermfg=' . fg[1],
+        \ 'guibg=' . bg[0], 'ctermbg=' . bg[1],
+        \ 'gui=' . emstr[:-2], 'cterm=' . emstr[:-2]
+        \ ]
+  if a:0 >= 3
+    call add(histring, 'guisp=' . a:3[0])
+  endif
+  execute join(histring, ' ')
+endfunction
+
 let s:gb = {}
 let s:gb.dark0_hard  = ['#1d1d1d', 234]
-let s:gb.dark00  = ['#212121', 234]
-" let s:gb.dark0_hard  = ['black', 0]
-let s:gb.dark0       = ['#282828', 235]
+let s:gb.dark0  = ['#212121', 234]
 let s:gb.dark0_soft  = ['#32302f', 236]
-" let s:gb.dark1       = ['#3c3836', 237]
 let s:gb.dark1       = ['#1d1d1d', 234]
 let s:gb.dark2       = ['#504945', 239]
 let s:gb.dark3       = ['#665c54', 241]
 let s:gb.dark4       = ['#7c6f64', 243]
 let s:gb.dark4_256   = ['#7c6f64', 243]
 let s:gb.gray_245    = ['#928374', 245]
-" let s:gb.gray_245    = ['#458588', 245]
 let s:gb.gray_244    = ['#928374', 244]
 let s:gb.light0      = ['#fbf1c7', 229]
 let s:gb.light1      = ['#ebcdb2', 223]
@@ -58,8 +78,7 @@ let s:vim_bg = ['bg', 'bg']
 let s:vim_fg = ['fg', 'fg']
 let s:none = ['NONE', 'NONE']
 let s:bg = s:gb.dark0_soft
-let s:bg0  = s:gb.dark00
-" let s:bg0  = s:gb.dark0
+let s:bg0  = s:gb.dark0
 let s:bg1  = s:gb.dark1
 let s:bg2  = s:gb.dark2
 let s:bg3  = s:gb.dark3
@@ -91,8 +110,6 @@ let s:gb.fg2 = s:fg2
 let s:gb.fg3 = s:fg3
 let s:gb.fg4 = s:fg4
 let s:gb.fg4_256 = s:fg4_256
-
-" Neovim: {{{
 let g:terminal_color_0 = s:bg0[0]
 let g:terminal_color_8 = s:gray[0]
 let g:terminal_color_1 = s:gb.neutral_red[0]
@@ -109,8 +126,6 @@ let g:terminal_color_6 = s:gb.neutral_aqua[0]
 let g:terminal_color_14 = s:aqua[0]
 let g:terminal_color_7 = s:fg4[0]
 let g:terminal_color_15 = s:fg1[0]
-" }}}
-
 let s:bold = 'bold,'
 let s:italic = 'italic,'
 let s:underline = 'underline,'
@@ -127,82 +142,6 @@ let s:invert_tabline = ''
 let s:italicize_comments = s:italic
 let s:italicize_strings = ''
 
-function! s:HL(group, fg, ...) " Arguments: group, guifg, guibg, gui, guisp
-  let fg = a:fg
-
-  if a:0 >= 1
-    let bg = a:1
-  else
-    let bg = s:none
-  endif
-
-  if a:0 >= 2 && strlen(a:2)
-    let emstr = a:2
-  else
-    let emstr = 'NONE,'
-  endif
-
-  let histring = [ 'hi', a:group,
-        \ 'guifg=' . fg[0], 'ctermfg=' . fg[1],
-        \ 'guibg=' . bg[0], 'ctermbg=' . bg[1],
-        \ 'gui=' . emstr[:-2], 'cterm=' . emstr[:-2]
-        \ ]
-
-  if a:0 >= 3
-    call add(histring, 'guisp=' . a:3[0])
-  endif
-
-  execute join(histring, ' ')
-endfunction
-
-" Version_700: {{{
-hi! link CursorColumn CursorLine
-" call s:HL('TabLineFill', s:red, s:bg1, s:invert_tabline)
-" call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
-" call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
-" call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
-" call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
-call s:HL('TabLineFill', s:bg4, s:bg1, s:bold)
-" call s:HL('TabLineSel', s:orange, s:bg1, s:underline)
-" call s:HL('TabLineDir', s:red0, s:bg1, s:underline)
-" call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
-call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
-call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
-hi! link TabLine TabLineFill
-call s:HL('MatchParen', s:none, s:bg3, s:bold)
-call s:HL('Pmenu', s:fg1, s:bg2)
-call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
-call s:HL('PmenuSbar', s:none, s:bg2)
-call s:HL('PmenuThumb', s:none, s:bg4)
-" }}}
-
-" Version_703: {{{
-call s:HL('ColorColumn',  s:none, s:color_column)
-call s:HL('Conceal', s:blue, s:none)
-call s:HL('CursorLine',s:none, s:bg)
-call s:HL('CursorLineNr', s:yellow, s:bg1)
-" }}}
-
-" Spelling: {{{
-" call s:HL('SpellCap',   s:none, s:none, s:undercurl, s:red)
-" call s:HL('SpellBad',   s:none, s:none, s:undercurl, s:blue)
-" call s:HL('SpellLocal', s:none, s:none, s:undercurl, s:aqua)
-" call s:HL('SpellRare',  s:none, s:none, s:undercurl, s:purple)
-hi SpellBad ctermfg=Red ctermbg=00 guifg=#ff0000 guibg=#000000
-" }}}
-
-" Asynchronous Lint Engine: {{{
-
-call s:HL('ALEError', s:none, s:none, s:undercurl, s:red)
-call s:HL('ALEWarning', s:none, s:none, s:undercurl, s:yellow)
-call s:HL('ALEInfo', s:none, s:none, s:undercurl, s:blue)
-
-hi! link ALEErrorSign GruvboxRedSign
-hi! link ALEWarningSign GruvboxYellowSign
-hi! link ALEInfoSign GruvboxBlueSign
-
-" }}}
-
 hi! link NonText GruvboxBg2
 hi! link SpecialKey GruvboxBg2
 hi! link VisualNOS Visual
@@ -215,6 +154,7 @@ hi! link WarningMsg GruvboxRedBold
 hi! link vCursor Cursor
 hi! link iCursor Cursor
 hi! link lCursor Cursor
+hi! link CursorColumn CursorLine
 hi! link Statement GruvboxRed
 hi! link Conditional GruvboxRed
 hi! link Repeat GruvboxRed
@@ -235,7 +175,9 @@ hi! link Boolean GruvboxPurple
 hi! link Number GruvboxPurple
 hi! link Float GruvboxPurple
 hi! link Type GruvboxYellow
+hi! link TabLine TabLineFill
 hi! link StorageClass GruvboxOrange
+hi! link SpellBad GruvboxRedBold
 hi! link Structure GruvboxAqua
 hi! link Typedef GruvboxYellow
 hi! link CocErrorSign GruvboxRedSign
@@ -256,8 +198,8 @@ hi! link QuickScopePrimary GruvboxRed
 hi! link QuickScopeSecondary GruvboxGreen
 hi! link CocExplorerNormalFloat GruvboxFg0
 hi! link CocExplorerNormalFloatBorder GruvboxFg0
-" hi! link CocExplorerFileDirectory GruvboxOrange
-" hi! link CocExplorerFileDirectory GruvboxRed
+hi! link CocExplorerFileDirectory GruvboxOrange
+hi! link CocExplorerFileDirectory GruvboxRed
 
 call s:HL('GruvboxFg0', s:fg0)
 call s:HL('GruvboxFg1', s:fg1)
@@ -298,7 +240,6 @@ call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 call s:HL('Underlined', s:blue, s:none, s:underline)
 call s:HL('StatusLine',   s:bg0, s:red, s:inverse)
 call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
-" call s:HL('VertSplit', s:bg3, s:vert_split)
 call s:HL('VertSplit', s:bg0, s:vert_split)
 call s:HL('WildMenu', s:blue, s:bg2, s:bold)
 call s:HL('ErrorMsg',   s:bg0, s:red, s:bold)
@@ -320,26 +261,15 @@ call s:HL('CocErrorHighlight', s:none, s:none, s:undercurl, s:red)
 call s:HL('CocWarningHighlight', s:none, s:none, s:undercurl, s:orange)
 call s:HL('CocInfoHighlight', s:none, s:none, s:undercurl, s:yellow)
 call s:HL('CocHintHighlight', s:none, s:none, s:undercurl, s:blue)
-
-" Vim: {{{
-
-call s:HL('vimCommentTitle', s:fg4_256, s:none, s:bold . s:italicize_comments)
-
-hi! link vimNotation GruvboxOrange
-hi! link vimBracket GruvboxOrange
-hi! link vimMapModKey GruvboxOrange
-hi! link vimFuncSID GruvboxFg3
-hi! link vimSetSep GruvboxFg3
-hi! link vimSep GruvboxFg3
-hi! link vimContinue GruvboxFg3
-
-" }}}
-" Go: {{{
-
-hi! link goDirective GruvboxAqua
-hi! link goConstants GruvboxPurple
-hi! link goDeclaration GruvboxRed
-hi! link goDeclType GruvboxBlue
-hi! link goBuiltins GruvboxOrange
-
-" }}}
+call s:HL('TabLineFill', s:bg4, s:bg1, s:bold)
+call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
+call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
+call s:HL('MatchParen', s:none, s:bg3, s:bold)
+call s:HL('Pmenu', s:fg1, s:bg2)
+call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
+call s:HL('PmenuSbar', s:none, s:bg2)
+call s:HL('PmenuThumb', s:none, s:bg4)
+call s:HL('ColorColumn',  s:none, s:color_column)
+call s:HL('Conceal', s:blue, s:none)
+call s:HL('CursorLine',s:none, s:bg)
+call s:HL('CursorLineNr', s:yellow, s:bg1)

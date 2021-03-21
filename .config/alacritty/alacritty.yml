@@ -11,10 +11,10 @@ window:
     x: 4
     y: 0
 
-  dynamic_padding: false
-  decorations: none
-  # startup_mode: Windowed
-  startup_mode: Maximized
+  # decorations: none
+  dynamic_padding: true
+  startup_mode: Windowed
+  # startup_mode: Maximized
 
 font:
   # normal:
@@ -35,7 +35,7 @@ font:
   # normal:
   #   family: "Fira code"
   #   style: Light
-  size: 14
+  size: 15
   # size: 12.5
   offset:
     x: 0

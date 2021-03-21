@@ -25,21 +25,7 @@ gem install neovim
 # expected: NVIM v0.5.0-dev+... Build type: Debug LuaJIT 2.1.0-beta3 ...
 # execute :checkhealth in nvim
 
-```
-
-#
-
-### I use this tools
-
-Importance, priority. (ip)  
-[low] 1 =< ip =< 10 [high], this is just my sense.
-
-```sh
-# (ip: 8)
-# fast terminal # https://github.com/alacritty/alacritty
-# If use alacritty, install nerd-font* and overwrite setting your favorite fonts.
-# https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts
-# settings in .config/alacritty/alacritty.yml
+# tools
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
 brew install alaclitty
@@ -49,14 +35,28 @@ brew install ripgrep
 brew install bat
 brew install gh
 
-# (ip: 5)
+# other, I uses.
 brew install tig
 brew install amethyst
 brew install git-delta
 brew install translate-shell
 brew install watchman
 
-# (ip: 3)
+## parser
+brew install jq
+brew install yq
+brew install pup
+
+# formatter, linter (ip: 6)
+brew install lua-format
+brew install shfmt
+brew install gofmt
+brew install clang-format
+brew install psalm
+brew install vint
+brew install shellcheck
+
+# other
 brew install archey
 brew install cowsay
 brew install figlet
@@ -65,22 +65,6 @@ brew install boxes
 brew install mpv
 brew install youtube-dl
 brew install tmux-xpanes
-
-## parser (ip: 6)
-brew install jq
-brew install yq
-brew install pup
-
-# formatter, linter (ip: 6)
-# used with https://github.com/iamcco/coc-diagnostic
-# settings in .config/nvim/coc-settings.json
-brew install lua-format
-brew install shfmt
-brew install gofmt
-brew install clang-format
-brew install psalm
-brew install vint
-brew install shellcheck
 ...
 ```
 
@@ -119,14 +103,6 @@ export PROFILE=$HOME/kis9a # change to your gihtub id.
 
 ```
 
-```
-cd ~/
-rm -rf .config/ bin/
-make deploy
-zsh
-nvim
-```
-
 - vim .git/config
 
 ```sh
@@ -135,6 +111,10 @@ nvim
 	fetch = +refs/heads/*:refs/remotes/origin/*
 ...
 
+```
+
+```sh
+# push
 gh auth login
 gh create repo dotfiles
 git add . && git commit -m "init"
@@ -142,7 +122,14 @@ git push -u origin master
 
 ```
 
-<img width="900" alt="Screen Shot 2021-03-18 at 1 12 04" src="https://user-images.githubusercontent.com/65019715/111500182-0d652800-8787-11eb-9f30-1db41472aa7b.png">
+```
+# deploy
+cd ~/
+rm -rf .config/ bin/
+make deploy
+zsh
+nvim
+```
 
 ### Usage
 
@@ -162,51 +149,3 @@ Vim extended functions and comunity.
 
 Language-Server-Protocol(LSP) client for neovim.  
 <https://github.com/neoclide/coc.nvim>
-
-<details><summary>What is the LSP ?</summary><div>{{{
-
-· [Official page for Language Server Protocol](https://microsoft.github.io/language-server-protocol/)  
-· [language server protocol について (前編) - Qiita](https://qiita.com/atsushieno/items/ce31df9bd88e98eec5c4)  
-· [プロトコルとは？初心者でもわかる IT 用語解説！ | ColorfulBoxMedia](https://www.colorfulbox.jp/media/protocol/)
-
-**Functions**
-
-| リクエスト                     | 説明                                                     |
-| ------------------------------ | -------------------------------------------------------- |
-| textDocument/completion        | 自動補完                                                 |
-| completionItem/resolve         | 自動補完候補の選択                                       |
-| textDocument/hover             | ヒント（ホバー）の表示                                   |
-| textDocument/signatureHelp     | メンバー定義(signature)候補の表示                        |
-| textDocument/definition        | シンボルの定義の位置を取得                               |
-| textDocument/references        | シンボルの利用（参照）位置のリスト取得                   |
-| textDocument/documentHighlight | ハイライト対象シンボルの利用（参照）のリスト取得         |
-| textDocument/documentSymbol    | ドキュメント中で定義されている全シンボルの取得           |
-| workspace/symbol               | ワークスペース全体からクエリ条件に合致するシンボルの取得 |
-| textDocument/codeAction        | コード アクションのリストの取得                          |
-| textDocument/codeLens          | code lens のリストの取得                                 |
-| codeLens/resolve               | code lens の処理の実行                                   |
-| textDocument/formatting        | ドキュメントの整形                                       |
-| textDocument/rangeFormatting   | 選択範囲の整形                                           |
-| textDocument/onTypeFormatting  | タイプ時の整形                                           |
-| textDocument/rename            | 識別子の変更                                             |
-
-| リクエスト                       | 説明                                             |
-| -------------------------------- | ------------------------------------------------ |
-| workspace/didChangeConfiguration | ワークスペースの設定変更                         |
-| textDocument/didOpen             | ドキュメントを開いたという通知                   |
-| textDocument/didChange           | ドキュメントの内容を変更したという通知           |
-| textDocument/didClose            | ドキュメントを閉じたという通知                   |
-| textDocument/didSave             | ドキュメントを保存したという通知                 |
-| workspace/didChangeWatchedFiles  | 監視していたファイルへの変更を検出したという通知 |
-| textDocument/publishDiagnostics  | ドキュメントに対する検証処理の結果通知           |
-
-| リクエスト                | 説明                               |
-| ------------------------- | ---------------------------------- |
-| $/cancelRequest           | リクエストのキャンセル             |
-| exit                      | 終了                               |
-| window/showMessage        | メッセージ表示の要求               |
-| window/showMessageRequest | 応答要求を含むメッセージ表示の要求 |
-| window/logMessage         | メッセージのログ記録要求           |
-| telemetry/event           | 各種 telemetry イベントの発生      |
-
-</div></details>}}}

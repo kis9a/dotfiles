@@ -1,5 +1,4 @@
-" --- setting --- {{{
-"  To reference, ctrl -k or :h option<CR>
+" Settings {{{
 set autochdir
 set autoindent
 set clipboard+=unnamedplus
@@ -15,6 +14,7 @@ set lazyredraw
 set modifiable
 set mouse=nv
 set nobackup
+set nowritebackup
 set noerrorbells
 set noruler
 set noshowcmd
@@ -40,14 +40,12 @@ set ttimeoutlen=0
 set updatetime=300
 set viminfo="NONE"
 set virtualedit=block
-"}}}
-
-" --- variables --- {{{
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
-let &statusline='%n:%f %q %y'
-"" let g:loaded_~~ to disable default neovim plugins
+let &statusline='[%n]%y %f %q '
+let g:loaded_netrwSettings = 1
+let g:loaded_netrwFileHandlers = 1
 let g:loaded_netrwPlugin = 1
 let g:loaded_man = 1
 let g:loaded_gzip = 1
@@ -61,19 +59,170 @@ let g:loaded_vimball = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_getscript = 1
 let g:loaded_getscriptPlugin = 1
-let g:loaded_matchparen = 1
 let g:loaded_shada_plugin = 1
+let g:loaded_shada_autoload = 1
+let g:loaded_sql_completion = 1
+let g:loaded_msgpack_autoload = 1
 let g:loaded_tutor_mode_plugin = 1
+let g:loaded_matchparen = 1
+let g:loaded_matchit = 1
+let g:loaded_dbext = 1
+
 "}}}
 
-"  --- plugins --- {{{
-source ~/.config/nvim/plugins.vim
+" Plugins {{{
+" vim-plug Installation {{{
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
+endif
+"}}}
+" :PlugSnapshot{{{
+silent! let g:plugs['coc.nvim'].commit = '70e5a383cd1c5e39505ef016e8507e7daa4bc7dc'
+silent! let g:plugs['indentLine'].commit = '5617a1cf7d315e6e6f84d825c85e3b669d220bfa'
+silent! let g:plugs['nvim-treesitter'].commit = '9d57216c0d94c9823c0d971caeaffb3b261e527e'
+silent! let g:plugs['quick-scope'].commit = 'd4c02b85ff168f7749833607536cb02281464c26'
+silent! let g:plugs['vim-commentary'].commit = 'f8238d70f873969fb41bf6a6b07ca63a4c0b82b1'
+silent! let g:plugs['vim-grepper'].commit = 'e9004ce564891412cfe433cfbb97295cccd06b39'
+silent! let g:plugs['vim-rooter'].commit = '45ea40da3f223fff83fce0a643875e560ed20aae'
+silent! let g:plugs['vim-surround'].commit = 'f51a26d3710629d031806305b6c8727189cd1935'
+" :PlugUpdate!
 "}}}
 
-" --- color setting --- {{{
+call plug#begin('~/.config/nvim/plugged')
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" neoclide/coc.nvim {{{
+let g:coc_global_extensions = [
+      \  'coc-lists'
+      \, 'coc-git'
+      \, 'coc-diagnostic'
+      \, 'coc-explorer'
+      \, 'coc-tabnine'
+      \, 'coc-word'
+      \, 'coc-yank'
+      \, 'coc-pairs'
+      \, 'coc-snippets'
+      \, 'coc-highlight'
+      \, 'coc-prettier'
+      \, 'coc-eslint'
+      \, 'coc-clangd'
+      \, 'coc-html'
+      \, 'coc-css'
+      \, 'coc-emmet'
+      \, 'coc-go'
+      \, 'coc-json'
+      \, 'coc-lua'
+      \, 'coc-markdownlint'
+      \, 'coc-rust-analyzer'
+      \, 'coc-phpls'
+      \, 'coc-sh'
+      \, 'coc-toml'
+      \, 'coc-vimlsp'
+      \, 'coc-yaml'
+      \, 'coc-xml'
+      \, ]
+
+nnoremap <silent>s: :CocCommand<CR>
+nnoremap <silent>s; :<C-u>CocList<cr>
+nnoremap <silent>K :call <SID>show_documentation()<CR>
+nnoremap <silent>gd :CocCommand git.diffCached<CR>
+nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
+nnoremap <silent><C-n> :CocCommand explorer --sources=file+ --width=45<CR>
+nnoremap <C-p> :CocList gfiles<CR>
+nnoremap sb :CocList buffers<CR>
+nnoremap sp :CocList vimcommands<CR>
+nnoremap sf :CocList files<CR>
+nnoremap sg :CocList grep<CR>
+nnoremap sy :CocList yank<CR>
+nnoremap sc :CocList commits<CR>
+nnoremap gs :CocList gstatus<CR>
+nnoremap so :CocList outline<CR>
+nnoremap s' :CocList cmdhistory<CR>
+nmap sd <Plug>(coc-definition)
+nmap sq <Plug>(coc-fix-current)
+nmap st <Plug>(coc-type-definition)
+nmap sh <Plug>(coc-references)
+nmap sr <Plug>(coc-rename)
+nmap sk <Plug>(coc-format)
+nmap sq <Plug>(coc-diagnostic)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+"}}}
+Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
+" tpope/vim-commentary {{{
+xnoremap <silent> gc :Commentary<CR>
+nnoremap <silent> gc :Commentary<CR>
+"}}}
+Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
+" mhinz/vim-grepper {{{
+nnoremap <silent>gr :Grepper<CR>
+nnoremap gp :Grepper-
+nnoremap gk :Grepper-cd<CR>
+nnoremap gb :Grepper-buffer<CR>
+"}}}
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'unblevable/quick-scope'
+" unblevable/quick-scope {{{
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_lazy_highlight = 1
+"}}}
+Plug 'Yggdroot/indentLine'
+" Yggdroot/indentLine {{{
+let g:indentLine_faster = 1
+let g:indentLine_char_list = ['¦', '┆', '┊']
+"}}}
+Plug 'airblade/vim-rooter'
+Plug 'tpope/vim-surround'
+call plug#end()
+
+" vim-treesitter {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    indent = {
+      enable = true
+    }
+  },
+  ensure_installed = 'all'
+}
+EOF
+"}}}
+"}}}
+
+" Colors {{{
 syntax on
 set background=dark
-" ~/.config/nvim/colors/gruvbox.vim
 colorscheme gruvbox
 
 if exists("&termguicolors") && exists("&winblend")
@@ -84,20 +233,7 @@ if exists("&termguicolors") && exists("&winblend")
 endif
 "}}}
 
-" --- maps --- {{{
-"---------------------------------------------------------------------------|
-" Commands \ Modes | Normal | Insert | Command | Visual | Select | Operator |
-" map  / noremap   |    @   |   -    |    -    |   @    |   @    |    @     |
-" nmap / nnoremap  |    @   |   -    |    -    |   -    |   -    |    -     |
-" vmap / vnoremap  |    -   |   -    |    -    |   @    |   @    |    -     |
-" omap / onoremap  |    -   |   -    |    -    |   -    |   -    |    @     |
-" xmap / xnoremap  |    -   |   -    |    -    |   @    |   -    |    -     |
-" smap / snoremap  |    -   |   -    |    -    |   -    |   @    |    -     |
-" map! / noremap!  |    -   |   @    |    @    |   -    |   -    |    -     |
-" imap / inoremap  |    -   |   @    |    -    |   -    |   -    |    -     |
-" cmap / cnoremap  |    -   |   -    |    @    |   -    |   -    |    -     |
-"---------------------------------------------------------------------------"
-
+" Maps {{{
 " --- noremap --- {{{
 noremap ; :
 noremap : ;
@@ -128,13 +264,14 @@ nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}
 
-" --- nnoremap! ---
+" --- nnoremap! ---{{{
 noremap! <C-k> <Up>
 noremap! <C-j> <Down>
 noremap! <C-h> <Left>
 noremap! <C-l> <Right>
 noremap! <C-d> <BS>
 noremap! <C-c> <DEL>
+"}}}
 
 " --- inoremap --- {{{
 inoremap <C-x> <End><CR>
@@ -150,9 +287,10 @@ inoremap <C-i> <C-y>
 inoremap <C-]> <Esc><Right>
 inoremap <C-]> <Esc><Right>
 inoremap <C-s> <Esc>:w!<cr>
+inoremap <C-u> <Esc>ui
 "}}}
 
-" --- vnoremap --- {{{
+" --- xnoremap --- {{{
 xnoremap > >gv
 xnoremap < <gv
 xnoremap <C-k> "zx<Up>"zP`[V`]
@@ -163,21 +301,17 @@ xnoremap <silent> cy c<C-r>0<ESC>:let @/=@1<CR>:noh<CR>"
 xnoremap <silent> <Leader>t :'<,'> !trans -b -sl=en -tl=ja<CR>
 xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " }}}
-
-" --- end maps --- }}}
-
-" --- command ---{{{
-command! Rmt :%s/\s\+$//e " delete trailing space
-match errorMsg /\s\+$/ " hilight trailing space
 " }}}
 
-" --- tabline --- {{{
+" Functions {{{
+
+" TabLine {{{
 function! s:sid_prefix()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
 endfunction
 
 function! s:tb()
-  let s='%#TabLineDir#< %{fnamemodify(getcwd(), ":t")} >'
+  let s='%#TabLineDir#[ %{toupper(fnamemodify(getcwd(), ":t"))} ]'
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1]
@@ -213,8 +347,7 @@ nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
-"  --- vimquickfix --- {{{
-function! Toggle_qf()
+function! s:toggle_qf()
   let l:nr = winnr('$')
   cwindow
   let l:nr2 = winnr('$')
@@ -222,4 +355,8 @@ function! Toggle_qf()
     cclose
   endif
 endfunction
-nnoremap <script> <silent> <Leader>q :call Toggle_qf()<CR>
+nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
+
+command! Rmt :%s/\s\+$//e
+match errorMsg /\s\+$/
+" }}}
