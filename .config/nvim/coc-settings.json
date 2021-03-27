@@ -8,6 +8,7 @@
   "prettier.eslintIntegration": true,
   "coc.source.word.filetypes": ["markdown", "text"],
   "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "translator.toLang": "ja",
   "tabnine.priority": 100,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": true,
@@ -97,6 +98,5 @@
   "git.stagedDecorator": "● ",
   "git.conflictedDecorator": "✘",
   "git.untrackedDecorator": " ",
-  "git.showCommitInFloating": false,
-  "git.blameUseRealTime": true
+  "git.addGBlameToVirtualText": true
 }

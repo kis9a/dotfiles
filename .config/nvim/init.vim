@@ -103,6 +103,7 @@ let g:coc_global_extensions = [
       \, 'coc-pairs'
       \, 'coc-snippets'
       \, 'coc-highlight'
+      \, 'coc-translator'
       \, 'coc-prettier'
       \, 'coc-eslint'
       \, 'coc-clangd'
@@ -125,16 +126,17 @@ let g:coc_global_extensions = [
 nnoremap <silent>s: :CocCommand<CR>
 nnoremap <silent>s; :<C-u>CocList<cr>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
-nnoremap <silent>gd :CocCommand git.diffCached<CR>
+nnoremap <silent>gd :CocCommand git.showCommit<CR>
 nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
 nnoremap <silent><C-n> :CocCommand explorer --sources=file+ --width=45<CR>
 nnoremap <C-p> :CocList gfiles<CR>
-nnoremap sb :CocList buffers<CR>
+nnoremap sj :CocList buffers<CR>
 nnoremap sp :CocList vimcommands<CR>
 nnoremap sf :CocList files<CR>
 nnoremap sg :CocList grep<CR>
 nnoremap sy :CocList yank<CR>
 nnoremap sc :CocList commits<CR>
+nnoremap sb :CocList bcommits<CR>
 nnoremap gs :CocList gstatus<CR>
 nnoremap so :CocList outline<CR>
 nnoremap s' :CocList cmdhistory<CR>
@@ -142,13 +144,17 @@ nmap sd <Plug>(coc-definition)
 nmap sq <Plug>(coc-fix-current)
 nmap st <Plug>(coc-type-definition)
 nmap sh <Plug>(coc-references)
-nmap sr <Plug>(coc-rename)
 nmap sk <Plug>(coc-format)
 nmap sq <Plug>(coc-diagnostic)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap sk <Plug>(coc-translator-p)
+nmap sr <Plug>(coc-translator-r)
+vmap sk <Plug>(coc-translator-pv)
+vmap sr <Plug>(coc-translator-rv)
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
+nmap gjc <Plug>(coc-git-keepcurrent)
+nmap gjn <Plug>(coc-git-keepincoming)
+nmap gjb <Plug>(coc-git-keepboth)
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -259,7 +265,7 @@ nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $MEMOS<CR>
-nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>r :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}
 
