@@ -43,7 +43,7 @@ set virtualedit=block
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
-let &statusline='[%n]%y %f %q '
+let &statusline=' [%n] %y [%f] '
 let g:loaded_netrwSettings = 1
 let g:loaded_netrwFileHandlers = 1
 let g:loaded_netrwPlugin = 1
@@ -67,8 +67,7 @@ let g:loaded_tutor_mode_plugin = 1
 let g:loaded_matchparen = 1
 let g:loaded_matchit = 1
 let g:loaded_dbext = 1
-
-"}}}
+" }}}
 
 " Plugins {{{
 " vim-plug Installation {{{
@@ -311,7 +310,7 @@ function! s:sid_prefix()
 endfunction
 
 function! s:tb()
-  let s='%#TabLineDir#[ %{toupper(fnamemodify(getcwd(), ":t"))} ]'
+  let s='%#TabLineDir# [%{toupper(fnamemodify(getcwd(), ":t"))}] '
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1]
@@ -321,7 +320,7 @@ function! s:tb()
     let title = title
     let s .= '%'.i.'T'
     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= ' '.no .':'. title
+    let s .= ''.no .':['. title . ']'
     let s .= mod
     let s .= '%#TabLineFill#'
   endfor
@@ -347,6 +346,12 @@ nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
+" Trailing {{{
+command! Rmt :%s/\s\+$//e
+match errorMsg /\s\+$/
+" }}}
+
+" QF {{{
 function! s:toggle_qf()
   let l:nr = winnr('$')
   cwindow
@@ -356,7 +361,4 @@ function! s:toggle_qf()
   endif
 endfunction
 nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
-
-command! Rmt :%s/\s\+$//e
-match errorMsg /\s\+$/
 " }}}

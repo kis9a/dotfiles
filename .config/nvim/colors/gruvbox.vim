@@ -52,7 +52,7 @@ let s:gb.light2      = ['#d5c4a1', 250]
 let s:gb.light3      = ['#bdae93', 248]
 let s:gb.light4      = ['#a89984', 246]
 let s:gb.light4_256  = ['#a89984', 246]
-let s:gb.red0     = ['#ff0000', 9]
+let s:gb.red     = ['#ff0000', 9]
 let s:gb.bright_red     = ['#df5f5f', 167]
 let s:gb.bright_green   = ['#b8bb26', 142]
 let s:gb.bright_yellow  = ['#fabd2f', 214]
@@ -90,7 +90,7 @@ let s:fg2 = s:gb.light2
 let s:fg3 = s:gb.light3
 let s:fg4 = s:gb.light4
 let s:fg4_256 = s:gb.light4_256
-let s:red0 = s:gb.red0
+let s:red0 = s:gb.red
 let s:red    = s:gb.bright_red
 let s:green  = s:gb.bright_green
 let s:yellow = s:gb.bright_yellow
@@ -238,7 +238,7 @@ call s:HL('Visual',    s:none,  s:bg3, s:invert_selection)
 call s:HL('Search',    s:yellow, s:bg0, s:inverse)
 call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 call s:HL('Underlined', s:blue, s:none, s:underline)
-call s:HL('StatusLine',   s:bg0, s:red, s:inverse)
+call s:HL('StatusLine',   s:bg0, s:red0, s:inverse)
 call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
 call s:HL('VertSplit', s:bg0, s:vert_split)
 call s:HL('WildMenu', s:blue, s:bg2, s:bold)
@@ -262,8 +262,8 @@ call s:HL('CocWarningHighlight', s:none, s:none, s:undercurl, s:orange)
 call s:HL('CocInfoHighlight', s:none, s:none, s:undercurl, s:yellow)
 call s:HL('CocHintHighlight', s:none, s:none, s:undercurl, s:blue)
 call s:HL('TabLineFill', s:bg4, s:bg1, s:bold)
-call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
-call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
+call s:HL('TabLineSel', s:red0, s:bg1, s:invert_tabline)
+call s:HL('TabLineDir', s:red0, s:bg1, s:bold)
 call s:HL('MatchParen', s:none, s:bg3, s:bold)
 call s:HL('Pmenu', s:fg1, s:bg2)
 call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
