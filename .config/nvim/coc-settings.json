@@ -31,10 +31,6 @@
     },
     "vint": {
       "command": "vint"
-    },
-    "gofmt": {
-      "command": "gofmt",
-      "args": ["-w", "-"]
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
@@ -42,8 +38,7 @@
     "lua": "lua-format",
     "sh": "shfmt",
     "c": "clang-format",
-    "cpp": "clang-format",
-    "go": "gofmt"
+    "cpp": "clang-format"
   },
   "suggest.completionItemKindLabels": {
     "keyword": " [keyword]",

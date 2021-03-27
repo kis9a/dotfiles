@@ -144,7 +144,7 @@ nmap sd <Plug>(coc-definition)
 nmap sq <Plug>(coc-fix-current)
 nmap st <Plug>(coc-type-definition)
 nmap sh <Plug>(coc-references)
-nmap sk <Plug>(coc-format)
+nmap si <Plug>(coc-format)
 nmap sq <Plug>(coc-diagnostic)
 nmap sk <Plug>(coc-translator-p)
 nmap sr <Plug>(coc-translator-r)
@@ -196,6 +196,11 @@ nnoremap gk :Grepper-cd<CR>
 nnoremap gb :Grepper-buffer<CR>
 "}}}
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'mattn/vim-goimports'
+" mattn/vim-goimports{{{
+let g:goimports_cmd = 'goimports'
+let g:goimports_simplify_cmd = 'gofmt'
+"}}}
 Plug 'unblevable/quick-scope'
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -206,10 +211,13 @@ Plug 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
 let g:indentLine_char_list = ['¦', '┆', '┊']
 "}}}
+Plug 'easymotion/vim-easymotion'
+" easymotion/vim-easymotion{{{
+map , <Plug>(easymotion-overwin-f)
+"}}}
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 call plug#end()
-
 " vim-treesitter {{{
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -265,7 +273,7 @@ nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $MEMOS<CR>
-nnoremap <silent> <Leader>r :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}
 
