@@ -162,8 +162,6 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
@@ -196,11 +194,6 @@ nnoremap gk :Grepper-cd<CR>
 nnoremap gb :Grepper-buffer<CR>
 "}}}
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'mattn/vim-goimports'
-" mattn/vim-goimports{{{
-let g:goimports_cmd = 'goimports'
-let g:goimports_simplify_cmd = 'gofmt'
-"}}}
 Plug 'unblevable/quick-scope'
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -215,6 +208,7 @@ Plug 'easymotion/vim-easymotion'
 " easymotion/vim-easymotion{{{
 map , <Plug>(easymotion-overwin-f)
 "}}}
+Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 call plug#end()
@@ -267,6 +261,7 @@ nnoremap md :r! mdl
 nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
+nnoremap <silent> <Leader>h :noh<CR>
 nnoremap <silent> <C-w><C-q> :%bd<CR>
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
@@ -316,8 +311,6 @@ xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " }}}
 " }}}
 
-" Functions {{{
-
 " TabLine {{{
 function! s:sid_prefix()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
@@ -360,6 +353,7 @@ nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
+" Functions {{{
 " Trailing {{{
 command! Rmt :%s/\s\+$//e
 match errorMsg /\s\+$/

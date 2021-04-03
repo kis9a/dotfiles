@@ -26,10 +26,10 @@ font:
   # normal:
   #   family: "VictorMono Nerd Font"
   #   style: Thin
+  # normal:
+  #   family: "VictorMono Nerd Font Mono"
+  #   style: Regular
   normal:
-    family: "VictorMono Nerd Font Mono"
-    style: Regular
-  bold:
     family: "VictorMono NF"
     style: Medium
   # normal:
