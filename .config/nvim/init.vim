@@ -196,11 +196,6 @@ nnoremap gk :Grepper-cd<CR>
 nnoremap gb :Grepper-buffer<CR>
 "}}}
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'mattn/vim-goimports'
-" mattn/vim-goimports{{{
-let g:goimports_cmd = 'goimports'
-let g:goimports_simplify_cmd = 'gofmt'
-"}}}
 Plug 'unblevable/quick-scope'
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -215,6 +210,7 @@ Plug 'easymotion/vim-easymotion'
 " easymotion/vim-easymotion{{{
 map , <Plug>(easymotion-overwin-f)
 "}}}
+Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 call plug#end()
@@ -316,8 +312,6 @@ xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " }}}
 " }}}
 
-" Functions {{{
-
 " TabLine {{{
 function! s:sid_prefix()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
@@ -360,6 +354,7 @@ nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
+" Functions {{{
 " Trailing {{{
 command! Rmt :%s/\s\+$//e
 match errorMsg /\s\+$/

@@ -1,4 +1,6 @@
 [user]
+	; name = kis9a
+	; email = kis9ax@gmail.com
 	name = kis9a
 	email = kis9ax@gmail.com
 [github]
@@ -40,9 +42,3 @@
     file-style = bold yellow ul
     file-decoration-style = none
     hunk-header-decoration-style = red box
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true

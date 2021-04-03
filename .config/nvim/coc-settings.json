@@ -40,6 +40,9 @@
     "c": "clang-format",
     "cpp": "clang-format"
   },
+  "go.goplsOptions": {
+    "gofumpt": true
+  },
   "suggest.completionItemKindLabels": {
     "keyword": " [keyword]",
     "variable": "識[variable]",
