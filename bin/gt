@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function main() {
+	user=$(git config --list | grep user.name | cut -f 2 -d "=")
+
+  if [[ 'kis9a' = "$user" ]]; then
+		git config --global user.name 'kis9ax'
+		git config --global user.email 'kaito@evolany.com'
+  elif [[ 'kis9ax' = "$user" ]]; then
+		git config --global user.name 'kis9a'
+		git config --global user.email 'kis9ax@gmail.com'
+  fi
+
+   user=$(git config --list | grep user.name | cut -f 2 -d "=")
+   email=$(git config --list | grep user.email | cut -f 2 -d "=")
+
+   echo "$user" "$email"
+}
+
+main

@@ -27,10 +27,10 @@ font:
   #   family: "VictorMono Nerd Font"
   #   style: Thin
   normal:
-    family: "VictorMono Nerd Font Mono"
+    family: "VictorMono Nerd Font"
     style: Regular
   bold:
-    family: "VictorMono NF"
+    family: "VictorMono Nerd Font"
     style: Medium
   # normal:
   #   family: "Fira code"
@@ -56,7 +56,7 @@ colors:
     # black: "0x282828"
     black: "0x212121"
     red: "0xcc241d"
-    green: "0x98971a"
+    green: "0x9971a"
     yellow: "0xd79921"
     blue: "0x458588"
     magenta: "0xb16286"

@@ -7,13 +7,19 @@
   "eslint.autoFixOnSave": true,
   "prettier.eslintIntegration": true,
   "coc.source.word.filetypes": ["markdown", "text"],
-  "coc.preferences.formatOnSaveFiletypes": ["*"],
   "translator.toLang": "ja",
   "tabnine.priority": 100,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": true,
   "coc.preferences.extensionUpdateCheck": "never",
   "coc.preferences.jumpCommand": "drop",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "markdown",
+    "sh",
+    "bash",
+    "go",
+    "vim"
+  ],
   "emmet.includeLanguages": {
     "vue-html": "html",
     "javascript": "javascriptreact"
@@ -22,8 +28,7 @@
   "diagnostic-languageserver.enable": true,
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
-    "sh": "shellcheck",
-    "php": "phpstan"
+    "sh": "shellcheck"
   },
   "diagnostic-languageserver.formatters": {
     "clang-format": {
@@ -31,10 +36,6 @@
     },
     "vint": {
       "command": "vint"
-    },
-    "gofmt": {
-      "command": "gofmt",
-      "args": ["-w", "-"]
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
@@ -42,8 +43,7 @@
     "lua": "lua-format",
     "sh": "shfmt",
     "c": "clang-format",
-    "cpp": "clang-format",
-    "go": "gofmt"
+    "cpp": "clang-format"
   },
   "suggest.completionItemKindLabels": {
     "keyword": " [keyword]",
