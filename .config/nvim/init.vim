@@ -77,18 +77,6 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 "}}}
-" :PlugSnapshot{{{
-silent! let g:plugs['coc.nvim'].commit = 'd3e40ceabd76323c07434fc2711521cc8bb2d028'
-silent! let g:plugs['indentLine'].commit = '5617a1cf7d315e6e6f84d825c85e3b669d220bfa'
-silent! let g:plugs['nvim-treesitter'].commit = '11e1db3ec29abb5711556085766cb6912814c6dc'
-silent! let g:plugs['quick-scope'].commit = 'd4c02b85ff168f7749833607536cb02281464c26'
-silent! let g:plugs['vim-commentary'].commit = '349340debb34f6302931f0eb7139b2c11dfdf427'
-silent! let g:plugs['vim-easymotion'].commit = 'd75d9591e415652b25d9e0a3669355550325263d'
-silent! let g:plugs['vim-grepper'].commit = 'e9004ce564891412cfe433cfbb97295cccd06b39'
-silent! let g:plugs['vim-rooter'].commit = '544e701066c69bbeb45297d0285c2719e125440b'
-silent! let g:plugs['vim-surround'].commit = 'f51a26d3710629d031806305b6c8727189cd1935'
-" :PlugUpdate!
-"}}}
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -107,6 +95,7 @@ let g:coc_global_extensions = [
       \, 'coc-translator'
       \, 'coc-prettier'
       \, 'coc-eslint'
+      \, 'coc-tsserver'
       \, 'coc-clangd'
       \, 'coc-html'
       \, 'coc-css'
@@ -213,15 +202,18 @@ Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight!!' }
-" junegunn/limelight.vim{{
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" junegunn/limelight.vim{{{
 nnoremap <Leader>l :Limelight!!<CR>
 " }}}
 Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResize'] }
 " simeji/winresizer{{{
+let g:winresizer_start_key = 'ge'
 nnoremap ge :WinResizerStartResize<CR>
 " }}}
-
+Plug 'wakatime/vim-wakatime'
 call plug#end()
+
 " vim-treesitter {{{
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -231,14 +223,14 @@ require'nvim-treesitter.configs'.setup {
       enable = true
     }
   },
-  ensure_installed = 'all'
+  ensure_installed = "maintained"
 }
 EOF
 "}}}
 "}}}
 
 " Colors {{{
-syntax on
+syntax off
 set background=dark
 colorscheme gruvbox
 
@@ -366,6 +358,7 @@ nnoremap <C-w>c :tabnew<CR>
 
 " Trailing {{{
 command! Rmt :%s/\s\+$//e
+command! Date :put =strftime(\"%D\")
 match errorMsg /\s\+$/
 " }}}
 
@@ -384,4 +377,4 @@ nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 
 " au BufWritePost *.js,*.scss :!node-sass ~/Downloads/app_578/scss/dist.scss ~/Downloads/app_578/custom.css
 " au BufWritePost *.js,*.scss :!node-sass ~/Downloads/a/scss/dist.scss ~/Downloads/a/custom.css
-au BufWritePost *.js,*.scss :!node-sass /Users/evolany16/Downloads/a/scss/dist.scss /Users/evolany16/Downloads/b/custom.css
+" au BufWritePost *.js,*.scss :!node-sass /Users/evolany16/Downloads/a/scss/dist.scss /Users/evolany16/Downloads/b/custom.css

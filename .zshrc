@@ -23,7 +23,7 @@ if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
-source "$HOME/bin/z.sh"
+source "$HOME/bin/z"
 
 autoload -Uz _zinit
 autoload -Uz add-zsh-hook
@@ -125,3 +125,5 @@ export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
 export LUA_PATH='/Users/evolany16/.luarocks/share/lua/5.1/?.lua;/Users/evolany16/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua'
 export LUA_CPATH='/Users/evolany16/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/local/lib/lua/5.1/loadall.so'
 
+
+eval $(thefuck --alias)
