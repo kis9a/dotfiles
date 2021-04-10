@@ -259,6 +259,7 @@ nnoremap md :r! mdl
 nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
+nnoremap <silent> <Leader>h :noh<CR>
 nnoremap <silent> <C-w><C-q> :%bd<CR>
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
