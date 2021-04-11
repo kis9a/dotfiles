@@ -226,8 +226,8 @@ map , <Plug>(easymotion-overwin-f)
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
+Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'pocke/sushibar.vim', { 'on': 'Sushibar' }
-Plug 'akinsho/nvim-toggleterm.lua', { 'on': 'ToggleTerm' }
 Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight!!' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -348,11 +348,11 @@ xnoremap <silent> cy c<C-r>0<ESC>:let @/=@1<CR>:noh<CR>"
 xnoremap <silent> <Leader>t :'<,'> !trans -b -sl=en -tl=ja<CR>
 xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " }}}
-" }}}
 
 " --- tnnoremap --- {{{
 tnoremap <ESC> <C-\><C-n>
-"  }}}
+" }}}
+" }}}
 
 " TabLine {{{
 function! s:sid_prefix()
@@ -370,7 +370,7 @@ function! s:tb()
     let title = title
     let s .= '%'.i.'T'
     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= ''.no .':['. title . ']'
+    let s .= ' '.no .':['. title . ']'
     let s .= mod
     let s .= '%#TabLineFill#'
   endfor

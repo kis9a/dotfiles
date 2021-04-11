@@ -30,8 +30,14 @@ font:
   #   family: "VictorMono Nerd Font Mono"
   #   style: Regular
   normal:
-    family: "VictorMono NF"
-    style: Medium
+    family: "VictorMono Nerd Font"
+    style: SemiBold
+  bold:
+    family: "VictorMono Nerd Font"
+    style: Bold
+  # normal:
+  #   family: "VictorMono NF"
+  #   style: Medium
   # normal:
   #   family: "Fira code"
   #   style: Light
