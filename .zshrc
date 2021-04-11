@@ -23,6 +23,7 @@ if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/bin/z"
 
 autoload -Uz _zinit
 autoload -Uz add-zsh-hook
@@ -76,5 +77,38 @@ function ff() {
   cd $baseDir/$dir
 }
 
+function fzf-z-search() {
+    local res=$(z | sort -rn | cut -c 12- | fzf)
+    if [ -n "$res" ]; then
+        BUFFER+="cd $res"
+        zle accept-line
+    else
+        return 1
+    fi
+}
+
+zle -N fzf-z-search
+bindkey '^j' fzf-z-search
 # alias
 source ~/.aliases;
+
+# envs
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+export PATH="/usr/local/Cellar/php@7.2/7.2.34_2/bin:$PATH"
+
+php_log_path="~/Logs/php_error.log"
+
+function plog() {
+	if $1 = 'clear'
+	then
+		: > $php_log_path && echo "$php_log_path has been cleared!"
+	else
+		printf "\033c" && tail -n 1000 -f $php_log_path
+	fi
+}
+
+export HTTP_ROOT_DIR=~/dev
+export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
+export LUA_PATH='/Users/evolany16/.luarocks/share/lua/5.1/?.lua;/Users/evolany16/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua'
+export LUA_CPATH='/Users/evolany16/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/local/lib/lua/5.1/loadall.so'

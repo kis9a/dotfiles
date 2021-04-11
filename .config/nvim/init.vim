@@ -398,6 +398,7 @@ nnoremap <C-w>c :tabnew<CR>
 
 " Functions {{{
 " Trailing {{{
+command! Date :r!date "+\%F"
 command! Rmt :%s/\s\+$//e
 match errorMsg /\s\+$/
 " }}}
