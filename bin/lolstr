@@ -1,0 +1,17 @@
+#!/bin/bash
+
+tput clear
+
+echo "hello"
+
+sleep 3
+
+tput clear
+
+echo "hello2"
+
+sleep 3
+
+tput clear
+
+echo "hello3"

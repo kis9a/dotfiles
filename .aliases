@@ -15,11 +15,6 @@ alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
 alias tkw='tmux kill-server'
 alias pp=pbpaste
-alias ffp='ffprobe -hide_banner -show_format'
-alias ffimg='ls *(.png|.jpg) | fzf -m --prompt="twimg" | xargs -I {} sips -Z 720 {}'
-alias ff2gif='ls *(.mp4|.mov) | fzf -m --prompt="tw2gif" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" -r 10 {}.gif'
-alias ffmov2mp4='ls *.mov | fzf -m --prompt="twmov2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
-alias ffgif2mp4='ls *.gif | fzf -m --prompt="gif2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
 alias l='tree -a -C -h -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l1='tree -a -C -h -L 1 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l2='tree -a -C -h -L 2 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
@@ -29,13 +24,9 @@ alias m="(cd $MEMOS; fd -t f -d 3 | fzf --preview 'bat --style=numbers --color=a
 alias mem="top -l 1 | grep Mem"
 alias path='echo $PATH | tr ":" "\n"'
 alias tzsh='time  zsh -i -c exit'
-alias te='trans {en=ja}'
-alias tj='trans {ja=en}'
-alias yd='youtube-dl -ciw --restrict-filenames'
-alias ydd='youtube-dl -ciw --extract-audio --audio-format mp3 --restrict-filenames'
-alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
 alias porta='lsof -Pan -i tcp -i udp'
 
+# global
 alias -g C='| pbcopy'
 alias -g G='| grep --color=auto'
 alias -g H='| head -c'
@@ -49,7 +40,6 @@ alias -g P='| curl -s -T - https://ppng.io/kis9a'
 # git
 alias g='git'
 alias ga='git add'
-alias ga.='git add . && git status -s'
 alias gs='git status -s'
 alias gd='git diff'
 alias gd@='git diff @'
@@ -77,16 +67,29 @@ alias gst-untracked="git status --short | grep '^??'"
 alias gste="gst-staged | awk '{ print $2}' | xargs nvim -p"
 alias grget='git remote get-url origin'
 
+function ggrep() {
+  git grep -h $1 $(git rev-list --all)
+}
 
-alias pkill=pkill
+# media
+alias te='trans {en=ja}'
+alias tj='trans {ja=en}'
+alias ffp='ffprobe -hide_banner -show_format'
+alias ffimg='ls *(.png|.jpg) | fzf -m --prompt="twimg" | xargs -I {} sips -Z 720 {}'
+alias ff2gif='ls *(.mp4|.mov) | fzf -m --prompt="tw2gif" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" -r 10 {}.gif'
+alias ffmov2mp4='ls *.mov | fzf -m --prompt="twmov2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
+alias ffgif2mp4='ls *.gif | fzf -m --prompt="gif2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
+alias yd='youtube-dl -ciw --restrict-filenames'
+alias ydd='youtube-dl -ciw --extract-audio --audio-format mp3 --restrict-filenames'
+alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+
+
 function pkill () {
   lsof -i :$1 | awk '{l=$2} END {print l}' | xargs kill
 }
-alias pss=pss
 function pss () {
   ps aux | grep -E "PID|$1" | grep -v grep
 }
-alias mk=mk
 function mk () {
   mkdir $1; cd $1;
 }

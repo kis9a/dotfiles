@@ -166,6 +166,21 @@ inoremap <silent><expr> <c-space> coc#refresh()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -208,11 +223,24 @@ Plug 'easymotion/vim-easymotion'
 " easymotion/vim-easymotion{{{
 map , <Plug>(easymotion-overwin-f)
 "}}}
-Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
+Plug 'wakatime/vim-wakatime'
+Plug 'pocke/sushibar.vim', { 'on': 'Sushibar' }
+Plug 'akinsho/nvim-toggleterm.lua', { 'on': 'ToggleTerm' }
+Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight!!' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" junegunn/limelight.vim{{{
+nnoremap <Leader>l :Limelight!!<CR>
+" }}}
+Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResize'] }
+" simeji/winresizer{{{
+let g:winresizer_start_key = 'ge'
+nnoremap ge :WinResizerStartResize<CR>
+" }}}
 call plug#end()
-" vim-treesitter {{{
+" vim-treesitter, toggleterm {{{
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -223,6 +251,16 @@ require'nvim-treesitter.configs'.setup {
   },
   ensure_installed = 'all'
 }
+
+require"toggleterm".setup{
+  size = 15,
+  open_mapping = [[<c-t>]],
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = '2',
+  start_in_insert = true,
+  direction = 'horizontal',
+}
 EOF
 "}}}
 "}}}
@@ -230,7 +268,8 @@ EOF
 " Colors {{{
 syntax on
 set background=dark
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme anynight
 
 if exists("&termguicolors") && exists("&winblend")
   set termguicolors
@@ -311,6 +350,10 @@ xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " }}}
 " }}}
 
+" --- tnnoremap --- {{{
+tnoremap <ESC> <C-\><C-n>
+"  }}}
+
 " TabLine {{{
 function! s:sid_prefix()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
@@ -369,4 +412,5 @@ function! s:toggle_qf()
   endif
 endfunction
 nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
+" }}}
 " }}}
