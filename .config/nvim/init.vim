@@ -249,7 +249,7 @@ require'nvim-treesitter.configs'.setup {
       enable = true
     }
   },
-  ensure_installed = 'all'
+  ensure_installed = 'maintained'
 }
 
 require"toggleterm".setup{
