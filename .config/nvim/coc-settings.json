@@ -7,7 +7,6 @@
   "eslint.autoFixOnSave": true,
   "prettier.eslintIntegration": true,
   "coc.source.word.filetypes": ["markdown", "text"],
-  "coc.preferences.formatOnSaveFiletypes": ["*"],
   "translator.toLang": "ja",
   "snippets.priority": 100,
   "tabnine.priority": 80,

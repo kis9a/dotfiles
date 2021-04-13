@@ -58,7 +58,6 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 bindkey '^I' expand-cmd-path
 bindkey '^I' complete-word
-bindkey '^T' menu-expand-or-complete
 bindkey '^A' end-of-line
 bindkey '^B' backward-char
 bindkey '^E' forward-char

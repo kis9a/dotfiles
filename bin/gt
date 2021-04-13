@@ -5,9 +5,11 @@ function main() {
 
   if [[ 'kis9a' = "$user" ]]; then
 		git config --global user.name 'kis9ax'
+		git config --global github.user 'kis9ax'
 		git config --global user.email 'kaito@evolany.com'
   elif [[ 'kis9ax' = "$user" ]]; then
 		git config --global user.name 'kis9a'
+		git config --global github.user 'kis9a'
 		git config --global user.email 'kis9ax@gmail.com'
   fi
 

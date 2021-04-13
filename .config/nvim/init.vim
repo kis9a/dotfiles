@@ -101,6 +101,7 @@ let g:coc_global_extensions = [
       \, 'coc-word'
       \, 'coc-yank'
       \, 'coc-pairs'
+      \, 'coc-tsserver'
       \, 'coc-snippets'
       \, 'coc-highlight'
       \, 'coc-translator'
@@ -129,6 +130,7 @@ nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <silent>gd :CocCommand git.showCommit<CR>
 nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
 nnoremap <silent><C-n> :CocCommand explorer --sources=file+ --width=45<CR>
+nnoremap <silent><C-w>n :CocCommand explorer --sources=file+ --position=floating --floating-width=10000 --floating-height=10000<CR>
 nnoremap <C-p> :CocList gfiles<CR>
 nnoremap sj :CocList buffers<CR>
 nnoremap sp :CocList vimcommands<CR>
@@ -227,6 +229,7 @@ Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
 Plug 'akinsho/nvim-toggleterm.lua'
+Plug 'chr4/nginx.vim'
 Plug 'pocke/sushibar.vim', { 'on': 'Sushibar' }
 Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight!!' }
@@ -298,6 +301,7 @@ nnoremap sv :vs<CR>
 nnoremap sn :tab split<CR>
 nnoremap md :r! mdl 
 nnoremap <silent> <C-s> :w!<cr>
+nnoremap <silent> <Leader>s :noa w<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
 nnoremap <silent> <Leader>h :noh<CR>
@@ -400,6 +404,8 @@ nnoremap <C-w>c :tabnew<CR>
 " Trailing {{{
 command! Date :r!date "+\%F"
 command! Rmt :%s/\s\+$//e
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
 match errorMsg /\s\+$/
 " }}}
 
@@ -415,3 +421,5 @@ endfunction
 nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 " }}}
 " }}}
+
+au BufWritePost *.lua,*.conf :!nginx -s reload

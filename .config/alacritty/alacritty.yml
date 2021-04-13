@@ -9,9 +9,9 @@ window:
     lines: 35
   padding:
     x: 5
-    y: 0
+    y: 2
 
-  # decorations: none
+  decorations:  Buttonless
   dynamic_padding: true
   startup_mode: Windowed
   # startup_mode: Maximized
@@ -26,15 +26,15 @@ font:
   # normal:
   #   family: "VictorMono Nerd Font"
   #   style: Thin
-  # normal:
-  #   family: "VictorMono Nerd Font Mono"
-  #   style: Regular
   normal:
     family: "VictorMono Nerd Font"
-    style: SemiBold
+    style: Regular
   bold:
     family: "VictorMono Nerd Font"
-    style: Bold
+    style: SemiBold
+  # bold:
+  #   family: "VictorMono Nerd Font"
+  #   style: Bold
   # normal:
   #   family: "VictorMono Nerd Font"
   #   style: Regular
@@ -42,7 +42,7 @@ font:
   #   family: "VictorMono Nerd Font"
   #   style: Medium
   # normal:
-  #   family: "VictorMono NF"
+  #   family: "VictorMono Nerd Font"
   #   style: Medium
   # normal:
   #   family: "Fira code"

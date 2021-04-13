@@ -82,6 +82,7 @@ alias ffgif2mp4='ls *.gif | fzf -m --prompt="gif2mp4" | xargs -I {} ffmpeg -y -i
 alias yd='youtube-dl -ciw --restrict-filenames'
 alias ydd='youtube-dl -ciw --extract-audio --audio-format mp3 --restrict-filenames'
 alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias music="mpv --shuffle ~/lofi"
 
 
 function pkill () {
