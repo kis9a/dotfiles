@@ -420,6 +420,29 @@ function! s:toggle_qf()
 endfunction
 nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 " }}}
+
+" GX{{{
+if !exists("g:netrw_nogx")
+ if maparg('gx','n') == ""
+  if !hasmapto('<Plug>NetrwBrowseX')
+   nmap <unique> gx <Plug>NetrwBrowseX
+  endif
+  nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+ endif
+ if maparg('gx','v') == ""
+  if !hasmapto('<Plug>NetrwBrowseXVis')
+   vmap <unique> gx <Plug>NetrwBrowseXVis
+  endif
+  vno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
+ endif
+endif
+if exists("g:netrw_usetab") && g:netrw_usetab
+ if maparg('<c-tab>','n') == ""
+  nmap <unique> <c-tab> <Plug>NetrwShrink
+ endif
+ nno <silent> <Plug>NetrwShrink :call netrw#Shrink()<cr>
+endif
+" }}}
 " }}}
 
 au BufWritePost *.lua,*.conf :!nginx -s reload
