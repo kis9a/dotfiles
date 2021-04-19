@@ -9,7 +9,7 @@ if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 
   finish
 endif
 
-let g:colors_name='gruvbox'
+let g:colors_name='anynight'
 
 function! s:HL(group, fg, ...) 
 " Arguments: group, guifg, guibg, gui, guisp
@@ -35,48 +35,6 @@ function! s:HL(group, fg, ...)
   execute join(histring, ' ')
 endfunction
 
-" #fffcf5
-" #e93c00
-" #2e5fde
-" #e6edfa
-" #f4f8fb
-" #ffffff
-" #f5f7f8
-" #222222
-" #777777
-" #888888
-" #f2f2f2
-" #bbbbbb
-" #68c39f
-" #449bb5
-" #ffc60e
-" #ff96d4
-" #562fc3
-" #5f5bff
-" #1abc9c
-" #16a085
-" #2ecc71
-" #27ae60
-" #3498db
-" #2980b9
-" #9b59b6
-" #8e44ad
-" #34495e
-" #2c3e50
-" #f1c40f
-" #f39c12
-" #e67e22
-" #d35400
-" #e74c3c
-" #c0392b
-" #e93c00
-" #db1a1a
-" #ecf0f1
-" #bdc3c7
-" #95a5a6
-" #7f8c8d
-" #34495e
-" #2c3e50
 let s:gb = {}
 let s:gb.dark0_hard  = ['#1d1d1d', 234]
 let s:gb.dark0  = ['#212121', 234]
@@ -95,7 +53,7 @@ let s:gb.light3      = ['#bdae93', 248]
 let s:gb.light4      = ['#a89984', 246]
 let s:gb.light4_256  = ['#a89984', 246]
 let s:gb.red     = ['#ff0000', 9]
-let s:gb.bright_red     = ['#df5f5f', 167]
+let s:gb.bright_red     = ['#e74c3c', 167]
 let s:gb.bright_green   = ['#b8bb26', 142]
 let s:gb.bright_yellow  = ['#fabd2f', 214]
 let s:gb.bright_blue    = ['#83a598', 109]
@@ -184,97 +142,97 @@ let s:invert_tabline = ''
 let s:italicize_comments = s:italic
 let s:italicize_strings = ''
 
-hi! link NonText GruvboxBg2
-hi! link SpecialKey GruvboxBg2
+hi! link NonText AnynightBg2
+hi! link SpecialKey AnynightBg2
 hi! link VisualNOS Visual
-hi! link Directory GruvboxFg3
-hi! link Title GruvboxGreenBold
-hi! link MoreMsg GruvboxYellowBold
-hi! link ModeMsg GruvboxYellowBold
-hi! link Question GruvboxOrangeBold
-hi! link WarningMsg GruvboxRedBold
+hi! link Directory AnynightFg3
+hi! link Title AnynightGreenBold
+hi! link MoreMsg AnynightYellowBold
+hi! link ModeMsg AnynightYellowBold
+hi! link Question AnynightOrangeBold
+hi! link WarningMsg AnynightRedBold
 hi! link vCursor Cursor
 hi! link iCursor Cursor
 hi! link lCursor Cursor
 hi! link CursorColumn CursorLine
-hi! link Statement GruvboxRed
-hi! link Conditional GruvboxRed
-hi! link Repeat GruvboxRed
-hi! link Label GruvboxRed
-hi! link Exception GruvboxRed
+hi! link Statement AnynightRed
+hi! link Conditional AnynightRed
+hi! link Repeat AnynightRed
+hi! link Label AnynightRed
+hi! link Exception AnynightRed
 hi! link Operator Normal
-hi! link Keyword GruvboxRed
-hi! link Identifier GruvboxBlue
-hi! link Function GruvboxGreenBold
-hi! link PreProc GruvboxAqua
-hi! link Include GruvboxAqua
-hi! link Define GruvboxAqua
-hi! link Macro GruvboxAqua
-hi! link PreCondit GruvboxAqua
-hi! link Constant GruvboxPurple
-hi! link Character GruvboxPurple
-hi! link Boolean GruvboxPurple
-hi! link Number GruvboxPurple
-hi! link Float GruvboxPurple
-hi! link Type GruvboxYellow
+hi! link Keyword AnynightRed
+hi! link Identifier AnynightBlue
+hi! link Function AnynightGreenBold
+hi! link PreProc AnynightAqua
+hi! link Include AnynightAqua
+hi! link Define AnynightAqua
+hi! link Macro AnynightAqua
+hi! link PreCondit AnynightAqua
+hi! link Constant AnynightPurple
+hi! link Character AnynightPurple
+hi! link Boolean AnynightPurple
+hi! link Number AnynightPurple
+hi! link Float AnynightPurple
+hi! link Type AnynightYellow
 hi! link TabLine TabLineFill
-hi! link StorageClass GruvboxOrange
-hi! link SpellBad GruvboxRedBold
-hi! link Structure GruvboxAqua
-hi! link Typedef GruvboxYellow
-hi! link CocErrorSign GruvboxRedSign
-hi! link CocWarningSign GruvboxOrangeSign
-hi! link CocInfoSign GruvboxYellowSign
-hi! link CocHintSign GruvboxBlueSign
-hi! link CocErrorFloat GruvboxRed
-hi! link CocWarningFloat GruvboxOrange
-hi! link CocInfoFloat GruvboxYellow
-hi! link CocHintFloat GruvboxBlue
-hi! link CocDiagnosticsError GruvboxRed
-hi! link CocDiagnosticsWarning GruvboxOrange
-hi! link CocDiagnosticsInfo GruvboxYellow
-hi! link CocDiagnosticsHint GruvboxBlue
-hi! link CocSelectedText GruvboxRed
-hi! link CocCodeLens GruvboxGray
-hi! link QuickScopePrimary GruvboxRed
-hi! link QuickScopeSecondary GruvboxGreen
-hi! link CocExplorerNormalFloat GruvboxFg0
-hi! link CocExplorerNormalFloatBorder GruvboxFg0
-hi! link CocExplorerFileDirectory GruvboxOrange
-hi! link CocExplorerFileDirectory GruvboxRed
+hi! link StorageClass AnynightOrange
+hi! link SpellBad AnynightRedBold
+hi! link Structure AnynightAqua
+hi! link Typedef AnynightYellow
+hi! link CocErrorSign AnynightRedSign
+hi! link CocWarningSign AnynightOrangeSign
+hi! link CocInfoSign AnynightYellowSign
+hi! link CocHintSign AnynightBlueSign
+hi! link CocErrorFloat AnynightRed
+hi! link CocWarningFloat AnynightOrange
+hi! link CocInfoFloat AnynightYellow
+hi! link CocHintFloat AnynightBlue
+hi! link CocDiagnosticsError AnynightRed
+hi! link CocDiagnosticsWarning AnynightOrange
+hi! link CocDiagnosticsInfo AnynightYellow
+hi! link CocDiagnosticsHint AnynightBlue
+hi! link CocSelectedText AnynightRed
+hi! link CocCodeLens AnynightGray
+hi! link QuickScopePrimary AnynightRed
+hi! link QuickScopeSecondary AnynightGreen
+hi! link CocExplorerNormalFloat AnynightFg0
+hi! link CocExplorerNormalFloatBorder AnynightFg0
+hi! link CocExplorerFileDirectory AnynightOrange
+hi! link CocExplorerFileDirectory AnynightRed
 
-call s:HL('GruvboxFg0', s:fg0)
-call s:HL('GruvboxFg1', s:fg1)
-call s:HL('GruvboxFg2', s:fg2)
-call s:HL('GruvboxFg3', s:fg3)
-call s:HL('GruvboxFg4', s:fg4)
-call s:HL('GruvboxGray', s:gray)
-call s:HL('GruvboxBg0', s:bg0)
-call s:HL('GruvboxBg1', s:bg1)
-call s:HL('GruvboxBg2', s:bg2)
-call s:HL('GruvboxBg3', s:bg3)
-call s:HL('GruvboxBg4', s:bg4)
-call s:HL('GruvboxRed', s:red)
-call s:HL('GruvboxRedBold', s:red, s:none, s:bold)
-call s:HL('GruvboxGreen', s:green)
-call s:HL('GruvboxGreenBold', s:green, s:none, s:bold)
-call s:HL('GruvboxYellow', s:yellow)
-call s:HL('GruvboxYellowBold', s:yellow, s:none, s:bold)
-call s:HL('GruvboxBlue', s:blue)
-call s:HL('GruvboxBlueBold', s:blue, s:none, s:bold)
-call s:HL('GruvboxPurple', s:purple)
-call s:HL('GruvboxPurpleBold', s:purple, s:none, s:bold)
-call s:HL('GruvboxAqua', s:aqua)
-call s:HL('GruvboxAquaBold', s:aqua, s:none, s:bold)
-call s:HL('GruvboxOrange', s:orange)
-call s:HL('GruvboxOrangeBold', s:orange, s:none, s:bold)
-call s:HL('GruvboxRedSign', s:red, s:sign_column, s:invert_signs)
-call s:HL('GruvboxGreenSign', s:green, s:sign_column, s:invert_signs)
-call s:HL('GruvboxYellowSign', s:yellow, s:sign_column, s:invert_signs)
-call s:HL('GruvboxBlueSign', s:blue, s:sign_column, s:invert_signs)
-call s:HL('GruvboxPurpleSign', s:purple, s:sign_column, s:invert_signs)
-call s:HL('GruvboxAquaSign', s:aqua, s:sign_column, s:invert_signs)
-call s:HL('GruvboxOrangeSign', s:orange, s:sign_column, s:invert_signs)
+call s:HL('AnynightFg0', s:fg0)
+call s:HL('AnynightFg1', s:fg1)
+call s:HL('AnynightFg2', s:fg2)
+call s:HL('AnynightFg3', s:fg3)
+call s:HL('AnynightFg4', s:fg4)
+call s:HL('AnynightGray', s:gray)
+call s:HL('AnynightBg0', s:bg0)
+call s:HL('AnynightBg1', s:bg1)
+call s:HL('AnynightBg2', s:bg2)
+call s:HL('AnynightBg3', s:bg3)
+call s:HL('AnynightBg4', s:bg4)
+call s:HL('AnynightRed', s:red)
+call s:HL('AnynightRedBold', s:red, s:none, s:bold)
+call s:HL('AnynightGreen', s:green)
+call s:HL('AnynightGreenBold', s:green, s:none, s:bold)
+call s:HL('AnynightYellow', s:yellow)
+call s:HL('AnynightYellowBold', s:yellow, s:none, s:bold)
+call s:HL('AnynightBlue', s:blue)
+call s:HL('AnynightBlueBold', s:blue, s:none, s:bold)
+call s:HL('AnynightPurple', s:purple)
+call s:HL('AnynightPurpleBold', s:purple, s:none, s:bold)
+call s:HL('AnynightAqua', s:aqua)
+call s:HL('AnynightAquaBold', s:aqua, s:none, s:bold)
+call s:HL('AnynightOrange', s:orange)
+call s:HL('AnynightOrangeBold', s:orange, s:none, s:bold)
+call s:HL('AnynightRedSign', s:red, s:sign_column, s:invert_signs)
+call s:HL('AnynightGreenSign', s:green, s:sign_column, s:invert_signs)
+call s:HL('AnynightYellowSign', s:yellow, s:sign_column, s:invert_signs)
+call s:HL('AnynightBlueSign', s:blue, s:sign_column, s:invert_signs)
+call s:HL('AnynightPurpleSign', s:purple, s:sign_column, s:invert_signs)
+call s:HL('AnynightAquaSign', s:aqua, s:sign_column, s:invert_signs)
+call s:HL('AnynightOrangeSign', s:orange, s:sign_column, s:invert_signs)
 call s:HL('Normal', s:fg1, s:bg0)
 call s:HL('Visual',    s:none,  s:bg3, s:invert_selection)
 call s:HL('Search',    s:yellow, s:bg0, s:inverse)

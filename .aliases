@@ -57,6 +57,7 @@ alias gpl='git pull'
 alias gf='git fetch'
 alias gb='git branch'
 alias gcl='git clone'
+alias gcu='git config --global --list | HEAD -n 3'
 alias gclr='git clone --recurse-submodules'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -10"
 alias gll='git log --graph --oneline --decorate --all'
