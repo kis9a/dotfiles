@@ -35,6 +35,7 @@ function! s:HL(group, fg, ...)
   execute join(histring, ' ')
 endfunction
 
+
 let s:gb = {}
 let s:gb.dark0_hard  = ['#1d1d1d', 234]
 let s:gb.dark0  = ['#212121', 234]

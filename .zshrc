@@ -32,11 +32,17 @@ autoload -Uz compinit
 autoload -Uz vcs_info
 
 (( ${+_comps} )) && _comps[zinit]=_zinit
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-history-substring-search
-zinit light zdharma/history-search-multi-word
 zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
+
+function zvm_after_init() {
+  zinit light zsh-users/zsh-history-substring-search
+  zinit light zdharma/history-search-multi-word
+}
+zvm_after_init_commands+=(zvm_after_init)
 
 # prompt
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -111,3 +117,5 @@ export HTTP_ROOT_DIR=~/dev
 export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
 export LUA_PATH='/Users/evolany16/.luarocks/share/lua/5.1/?.lua;/Users/evolany16/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua'
 export LUA_CPATH='/Users/evolany16/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/local/lib/lua/5.1/loadall.so'
+
+eval $(thefuck --alias)
