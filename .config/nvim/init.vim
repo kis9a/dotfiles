@@ -242,25 +242,25 @@ fun! GotoWindow(id)
    let word = expand("<cexpr>")
    call vimspector#AddWatch(word)
  endfunction
- let g:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
+ let g:vimspector_base_dir = expand('$HOME/.config/vim/vimspector-config')
  let g:vimspector_sidebar_width = 60
- nnoremap <leader>da :call vimspector#Launch()<CR>
- nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
- nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
- nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
- nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
- nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
- nnoremap <leader>di :call AddToWatch()<CR>
- nnoremap <leader>dx :call vimspector#Reset()<CR>
- nnoremap <leader>dX :call vimspector#ClearBreakpoints()<CR>
- " nnoremap <S-k> :call vimspector#StepOut()<CR>
- " nnoremap <S-l> :call vimspector#StepInto()<CR>
- " nnoremap <S-j> :call vimspector#StepOver()<CR>
- nnoremap <leader>d_ :call vimspector#Restart()<CR>
- nnoremap <leader>dn :call vimspector#Continue()<CR>
- nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
- nnoremap <leader>dh :call vimspector#ToggleBreakpoint()<CR>
- nnoremap <leader>de :call vimspector#ToggleConditionalBreakpoint()<CR>
+ nnoremap <leader>sa :call vimspector#Launch()<CR>
+ nnoremap <leader>sc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+ nnoremap <leader>sv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+ nnoremap <leader>sw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+ nnoremap <leader>ss :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+ nnoremap <leader>so :call GotoWindow(g:vimspector_session_windows.output)<CR>
+ nnoremap <leader>si :call AddToWatch()<CR>
+ nnoremap <leader>sx :call vimspector#Reset()<CR>
+ nnoremap <leader>sX :call vimspector#ClearBreakpoints()<CR>
+ nnoremap <leader>st :call vimspector#StepOut()<CR>
+ nnoremap <leader>sf :call vimspector#StepInto()<CR>
+ nnoremap <leader>ss :call vimspector#StepOver()<CR>
+ nnoremap <leader>s_ :call vimspector#Restart()<CR>
+ nnoremap <leader>sn :call vimspector#Continue()<CR>
+ nnoremap <leader>src :call vimspector#RunToCursor()<CR>
+ nnoremap <leader>sh :call vimspector#ToggleBreakpoint()<CR>
+ nnoremap <leader>se :call vimspector#ToggleConditionalBreakpoint()<CR>
  let g:vimspector_sign_priority = {
    \    'vimspectorBP':         998,
    \    'vimspectorBPCond':     997,
@@ -345,15 +345,14 @@ nnoremap sv :vs<CR>
 nnoremap sn :tab split<CR>
 nnoremap md :r! mdl 
 nnoremap <silent> <C-s> :w!<cr>
-nnoremap <silent> <Leader>s :noa w<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
 nnoremap <silent> <Leader>h :noh<CR>
 nnoremap <silent> <C-w><C-q> :%bd<CR>
-nnoremap <Leader>r :%s///g<Left><Left>
+nnoremap <Leader>rg :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
-nnoremap <silent> <Leader>k :tabnew<CR>:e $MYVIMRC<CR>
+nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $MEMOS<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>

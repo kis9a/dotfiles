@@ -18,6 +18,7 @@
   "yank.priority": 20,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": true,
+  "snippets.userSnippetsDirectory": "~/.config/nvim/ultiSnips",
   "coc.preferences.extensionUpdateCheck": "never",
   "coc.preferences.jumpCommand": "drop",
   "emmet.includeLanguages": {
