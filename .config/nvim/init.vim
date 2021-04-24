@@ -159,6 +159,8 @@ nmap gjc <Plug>(coc-git-keepcurrent)
 nmap gjn <Plug>(coc-git-keepincoming)
 nmap gjb <Plug>(coc-git-keepboth)
 
+xmap <leader>f  <Plug>(coc-format-selected)
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -313,8 +315,8 @@ EOF
 " Colors {{{
 syntax on
 set background=dark
-" colorscheme gruvbox
-colorscheme anynight
+colorscheme gruvbox
+" colorscheme anynight
 
 if exists("&termguicolors") && exists("&winblend")
   set termguicolors
@@ -351,7 +353,7 @@ nnoremap <silent> <C-w><C-q> :%bd<CR>
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
-nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
+nnoremap <silent> <Leader>k :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $MEMOS<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
@@ -485,6 +487,22 @@ if exists("g:netrw_usetab") && g:netrw_usetab
  nno <silent> <Plug>NetrwShrink :call netrw#Shrink()<cr>
 endif
 " }}}
+
 " }}}
 
 au BufWritePost *.lua,*.conf :!nginx -s reload
+
+function! s:cnl()
+  let line = line(".")
+  let path = execute("echo expand('%:p')")
+  let dir = system("dirname " . "'" . path . "'")
+  if executable('git')
+    let cmd = "( cd " . dir . "; git blame -L " . line . "," . line . " '" . path . "' )"
+    " echo cmd
+    echo substitute(cmd, "\n$", '', '')
+    let blamestr = system(cmd)
+    " echo blamestr
+  endif
+endfunction
+
+nnoremap <silent> <Leader>c :call <SID>cnl()<CR>

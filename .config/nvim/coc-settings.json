@@ -29,7 +29,6 @@
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
     "sh": "shellcheck",
-    "php": "phpstan"
   },
   "diagnostic-languageserver.formatters": {
     "clang-format": {
