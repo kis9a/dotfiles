@@ -268,6 +268,26 @@ fun! GotoWindow(id)
    \    'vimspectorPC':         999,
    \ }
 "}}}
+Plug 'segeljakt/vim-silicon', { 'on': 'Silicon' }
+" segeljakt/vim-silicon{{{
+let g:silicon = {
+      \  'theme':              'gruvbox',
+      \  'font':                  'Hack',
+      \  'background':         '#AAAAFF',
+      \  'shadow-color':       '#555555',
+      \  'line-pad':                   2,
+      \  'pad-horiz':                 80,
+      \  'pad-vert':                 100,
+      \  'shadow-blur-radius':         0,
+      \  'shadow-offset-x':            0,
+      \  'shadow-offset-y':            0,
+      \  'line-number':           v:true,
+      \  'round-corner':          v:true,
+      \  'window-controls':       v:true,
+      \ }
+
+let g:silicon['output'] = '~/images/silicon-{time:%Y-%m-%d-%H%M%S}.png'
+"}}}
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 " liuchengxu/vista.vim {{{
 nnoremap <Leader>v :Vista!!<CR>
@@ -286,6 +306,7 @@ Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResi
 let g:winresizer_start_key = 'ge'
 nnoremap ge :WinResizerStartResize<CR>
 " }}}
+Plug 'honza/vim-snippets'
 call plug#end()
 " vim-treesitter, toggleterm {{{
 lua <<EOF
@@ -353,7 +374,7 @@ nnoremap <Leader>rg :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>j :tabnew<CR>:e $MEMOS<CR>
+nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}

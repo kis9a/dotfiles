@@ -1,10 +1,10 @@
 [user]
 	; name = kis9a
 	; email = kis9ax@gmail.com
-	name = kis9ax
-	email = kaito@evolany.com
+	name = kis9a
+	email = kis9ax@gmail.com
 [github]
-	user = kis9ax
+	user = kis9a
 [core]
     pager = delta
 	excludesfile = /Users/kis9a/.gitignore_global
