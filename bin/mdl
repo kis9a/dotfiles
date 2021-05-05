@@ -1,8 +1,0 @@
-#!/bin/bash
-
-function main() {
-  echo -n ["$( curl -sL "$1" | grep -o "<title>[^<]*" | tail -c+8 )"]
-  echo -n '('"$1"')'
-}
-
-main "$1"

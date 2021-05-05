@@ -9,8 +9,6 @@ setopt hist_reduce_blanks
 setopt share_history
 setopt prompt_subst
 setopt aliases
-unsetopt PROMPT_SP
-disable r
 
 # zinit
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -22,26 +20,26 @@ if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
   zcompile ~/.zshrc
 fi
 
+# source files
 source "$HOME/.zinit/bin/zinit.zsh"
 source "$HOME/bin/z"
+source ~/.aliases;
 
+# autoload
 autoload -Uz _zinit
 autoload -Uz add-zsh-hook
 autoload -Uz colors && colors
 autoload -Uz compinit
 autoload -Uz vcs_info
 
+# plugins
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit ice depth=1
-# zinit light jeffreytse/zsh-vi-mode
 zinit light zsh-users/zsh-autosuggestions
 zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
-
-# function zvm_after_init() {
-  zinit light zsh-users/zsh-history-substring-search
-  zinit light zdharma/history-search-multi-word
-# }
+zinit light zsh-users/zsh-history-substring-search
+zinit light zdharma/history-search-multi-word
 zvm_after_init_commands+=(zvm_after_init)
 
 # prompt
@@ -57,7 +55,7 @@ PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
 # bindkey
 bindkey -v
-bindkey -s '^v' 'nvim .^M'
+bindkey -s '^v' 'vim .^M'
 bindkey -M viins '^K'  backward-kill-line
 bindkey '^F' autosuggest-accept
 bindkey '^P' history-substring-search-up
@@ -69,17 +67,12 @@ bindkey '^B' backward-char
 bindkey '^E' forward-char
 bindkey '^D' backward-delete-char
 
+# functions
 function f() {
   dir=$(fd -t d -d 3 | fzf)
   if [ "$(echo $dir)" ]; then
     cd $dir
   fi
-}
-
-function ff() {
-  baseDir=$DEV
-  dir=$(fd -t d --base-directory $baseDir -d 3 | fzf)
-  cd $baseDir/$dir
 }
 
 function fzf-z-search() {
@@ -94,26 +87,3 @@ function fzf-z-search() {
 
 zle -N fzf-z-search
 bindkey '^j' fzf-z-search
-# alias
-source ~/.aliases;
-
-# envs
-export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
-export PATH="/usr/local/Cellar/php@7.2/7.2.34_2/bin:$PATH"
-
-php_log_path="~/Logs/php_error.log"
-
-function plog() {
-	if $1 = 'clear'
-	then
-		: > $php_log_path && echo "$php_log_path has been cleared!"
-	else
-		printf "\033c" && tail -n 1000 -f $php_log_path
-	fi
-}
-
-export HTTP_ROOT_DIR=~/dev
-export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
-export LUA_PATH='/Users/evolany16/.luarocks/share/lua/5.1/?.lua;/Users/evolany16/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua'
-export LUA_CPATH='/Users/evolany16/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/local/lib/lua/5.1/loadall.so'

@@ -17,6 +17,9 @@ clean: ## remove dotfiles
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
 
+brew: ## install with brew
+	@brew bundle --file $(DOTPATH)/etc/Brewfile
+
 help: ## show help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
