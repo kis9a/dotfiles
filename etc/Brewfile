@@ -1,0 +1,8 @@
+brew "fzf"
+brew "fd"
+brew "ripgrep"
+brew "bat"
+brew "jq"
+brew "tmux"
+brew "reattach-to-user-namespace"
+brew "translate-shell"
