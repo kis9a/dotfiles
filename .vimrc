@@ -115,6 +115,7 @@ nnoremap <Leader>rg :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap su :let @+ = expand("%:p")<cr>
 nnoremap <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
+nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <Leader>rl :so $MYVIMRC<CR>
 
 noremap! <C-k> <Up>

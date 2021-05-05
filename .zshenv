@@ -12,7 +12,17 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"' # use ripgrep
 export FZF_DEFAULT_OPTS='--height 100% --reverse'
 
 # path
+export PROFILE=$HOME/kis9a
+export MEMOS=$PROFILE/memos
+export TASKS=$PROFILE/tasks
+export TASK=$PROFILE/tasks/$(date +%Y)/$(date +%m).md
 export HISTORY=$HOME/.zsh_history
-export MYVIMRC=$HOME/.vimrc
+export MYVIMRC=$HOME/dotfiles/.config/nvim/init.vim
 export DOTFILES=$HOME/dotfiles
+export DEV=$HOME/dev
 export PATH=$HOME/bin:"$PATH"
+export GOPATH=$HOME/dev/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+source "$HOME/.cargo/env"

@@ -23,7 +23,6 @@ fi
 # source files
 source "$HOME/.zinit/bin/zinit.zsh"
 source "$HOME/bin/z"
-source ~/.aliases;
 
 # autoload
 autoload -Uz _zinit
@@ -87,3 +86,85 @@ function fzf-z-search() {
 
 zle -N fzf-z-search
 bindkey '^j' fzf-z-search
+
+
+# other
+alias a='alias'
+alias v='vim'
+alias sl='ls -lahGpt'
+alias path='echo $PATH | tr ":" "\n"'
+alias .='cd $DOTFILES'
+alias d='cd $DEV'
+alias n='cd $PROFILE'
+alias .='cd $DOTFILES'
+
+# tmux
+alias t='tmux -u new -s $(basename `pwd`)'
+alias ta='tmux a'
+alias tkw='tmux kill-server'
+
+# cd
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# preformance
+alias tzsh='time  zsh -i -c exit'
+alias mem="top -l 1 | grep Mem"
+alias sudo purge
+
+# global
+alias -g C='| pbcopy'
+alias -g G='| grep --color=auto'
+alias -g V='| vim -'
+
+# translate-shell
+alias te='trans {en=ja}'
+alias tj='trans {ja=en}'
+
+# git
+alias g='git'
+alias ga='git add'
+alias gd='git diff'
+alias gb='git branch'
+alias gp='git push'
+alias gpl='git pull'
+alias gf='git fetch'
+alias gr='git reset'
+alias gsw='git switch'
+alias gch='git checkout'
+alias gcl='git clone'
+
+## git status
+alias gs='git status -s'
+alias gs-staged="git status --short | grep '^\w.'"
+alias gs-unstaged="git status  --short | grep '^\W.'"
+alias gs-unstaged-tracked="git status  --short | grep '^\s.'"
+alias gs-untracked="git status --short | grep '^??'"
+alias gste="gst-staged | awk '{ print $2}' | xargs vim -p"
+
+## git commit
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit --am'
+
+## git log
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -10"
+alias gll='git log --graph --oneline --decorate --all'
+
+# functions
+function ggrep() {
+  git grep -h $1 $(git rev-list --all)
+}
+
+function pkill () {
+  lsof -i :$1 | awk '{l=$2} END {print l}' | xargs kill
+}
+
+function pss () {
+  ps aux | grep -E "PID|$1" | grep -v grep
+}
+
+function mk () {
+  mkdir $1; cd $1;
+}
