@@ -306,6 +306,7 @@ Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResi
 let g:winresizer_start_key = 'ge'
 nnoremap ge :WinResizerStartResize<CR>
 " }}}
+Plug 'honza/vim-snippets'
 call plug#end()
 " vim-treesitter, toggleterm {{{
 lua <<EOF
@@ -373,7 +374,7 @@ nnoremap <Leader>rg :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>j :tabnew<CR>:e $MEMOS<CR>
+nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}
