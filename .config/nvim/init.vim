@@ -272,12 +272,12 @@ Plug 'segeljakt/vim-silicon', { 'on': 'Silicon' }
 " segeljakt/vim-silicon{{{
 let g:silicon = {
       \  'theme':              'gruvbox',
-      \  'font':                  'Hack',
-      \  'background':         '#AAAAFF',
+      \  'font':                  'Victor Mono',
+      \  'background':         '#ffffff',
       \  'shadow-color':       '#555555',
       \  'line-pad':                   2,
-      \  'pad-horiz':                 80,
-      \  'pad-vert':                 100,
+      \  'pad-horiz':                 40,
+      \  'pad-vert':                 50,
       \  'shadow-blur-radius':         0,
       \  'shadow-offset-x':            0,
       \  'shadow-offset-y':            0,
@@ -526,3 +526,27 @@ function! s:cnl()
 endfunction
 
 nnoremap <silent> <Leader>c :call <SID>cnl()<CR>
+
+" statusline
+set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <Leader>s :call ToggleHiddenAll()<CR>

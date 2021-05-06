@@ -72,6 +72,38 @@ function ggrep() {
   git grep -h $1 $(git rev-list --all)
 }
 
+# docker
+alias dk='docker'
+alias dkp='docker ps'
+alias dkpa='docker ps -a'
+alias dkpaq='docker ps -a -q'
+alias dkb='docker build'
+alias dkbnc='docker build --no-cache -t'
+alias dkr='docker run --rm'
+alias dkrti='docker run --rm -ti'
+alias dkrd='docker run -d'
+alias dkrp8='docker run --rm -p 8080:8080'
+alias dkrp9='docker run --rm -p 9080:9080'
+alias dks='docker start'
+alias dkt='docker stop'
+alias dktt='docker stop $(docker ps -q)'
+alias dkk='docker kill'
+alias dkkk='docker kill $(docker ps -q)'
+alias dkrm='docker rm'
+alias dkri='docker rmi'
+alias dke='docker exec -ti'
+alias dkl='docker logs -f'
+alias dki='docker images'
+alias dkpu='docker pull'
+alias dkph='docker push'
+alias dkin='docker inspect'
+alias dkn='docker network'
+alias dkc='docker-compose'
+alias dkcu='docker-compose up'
+alias dkclean='docker ps -q -a -f status=exited | xargs -r docker rm && docker images -q -f dangling=true | xargs -r docker rmi'
+
+
+
 # media
 alias te='trans {en=ja}'
 alias tj='trans {ja=en}'
