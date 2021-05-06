@@ -29,7 +29,7 @@
   "diagnostic-languageserver.enable": true,
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
-    "sh": "shellcheck",
+    "sh": "shellcheck"
   },
   "diagnostic-languageserver.formatters": {
     "clang-format": {
@@ -102,6 +102,5 @@
   "git.stagedDecorator": "● ",
   "git.conflictedDecorator": "✘",
   "git.untrackedDecorator": " ",
-  "git.addGBlameToVirtualText": true,
-  "clangd.path": "/Users/evolany36/dotfiles/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd"
+  "git.addGBlameToVirtualText": true
 }

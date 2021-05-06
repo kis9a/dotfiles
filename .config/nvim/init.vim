@@ -77,17 +77,6 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 "}}}
-" :PlugSnapshot{{{
-silent! let g:plugs['coc.nvim'].commit = '70e5a383cd1c5e39505ef016e8507e7daa4bc7dc'
-silent! let g:plugs['indentLine'].commit = '5617a1cf7d315e6e6f84d825c85e3b669d220bfa'
-silent! let g:plugs['nvim-treesitter'].commit = '9d57216c0d94c9823c0d971caeaffb3b261e527e'
-silent! let g:plugs['quick-scope'].commit = 'd4c02b85ff168f7749833607536cb02281464c26'
-silent! let g:plugs['vim-commentary'].commit = 'f8238d70f873969fb41bf6a6b07ca63a4c0b82b1'
-silent! let g:plugs['vim-grepper'].commit = 'e9004ce564891412cfe433cfbb97295cccd06b39'
-silent! let g:plugs['vim-rooter'].commit = '45ea40da3f223fff83fce0a643875e560ed20aae'
-silent! let g:plugs['vim-surround'].commit = 'f51a26d3710629d031806305b6c8727189cd1935'
-" :PlugUpdate!
-"}}}
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -272,12 +261,12 @@ Plug 'segeljakt/vim-silicon', { 'on': 'Silicon' }
 " segeljakt/vim-silicon{{{
 let g:silicon = {
       \  'theme':              'gruvbox',
-      \  'font':                  'Hack',
-      \  'background':         '#AAAAFF',
+      \  'font':                  'Victor Mono',
+      \  'background':         '#ffffff',
       \  'shadow-color':       '#555555',
       \  'line-pad':                   2,
-      \  'pad-horiz':                 80,
-      \  'pad-vert':                 100,
+      \  'pad-horiz':                 40,
+      \  'pad-vert':                 50,
       \  'shadow-blur-radius':         0,
       \  'shadow-offset-x':            0,
       \  'shadow-offset-y':            0,
@@ -334,7 +323,7 @@ EOF
 "}}}
 
 " Colors {{{
-syntax on
+syntax off
 set background=dark
 colorscheme gruvbox
 " colorscheme anynight
@@ -526,3 +515,27 @@ function! s:cnl()
 endfunction
 
 nnoremap <silent> <Leader>c :call <SID>cnl()<CR>
+
+" statusline
+set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
+let s:hidden_all = 1
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <Leader>k :call ToggleHiddenAll()<CR>
