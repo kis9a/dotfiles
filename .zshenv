@@ -1,4 +1,4 @@
-# genera
+# general
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=vim
@@ -17,7 +17,7 @@ export MEMOS=$PROFILE/memos
 export TASKS=$PROFILE/tasks
 export TASK=$PROFILE/tasks/$(date +%Y)/$(date +%m).md
 export HISTORY=$HOME/.zsh_history
-export MYVIMRC=$HOME/dotfiles/.config/nvim/init.vim
+export MYVIMRC=$HOME/.vimrc
 export DOTFILES=$HOME/dotfiles
 export DEV=$HOME/dev
 export PATH=$HOME/bin:"$PATH"

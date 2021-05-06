@@ -48,6 +48,7 @@ filetype on
 
 let mapleader="\<Space>"
 let maplocalleader="\,"
+let g:netrw_banner=0
 let g:netrw_browsex_viewer="open"
 let &statusline=' [%n] %y [%f] '
 let g:loaded_netrwSettings = 1
@@ -61,21 +62,101 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-" junegunn/fzf {{{
-nnoremap <silent><C-p> :GFiles<CR>
-nnoremap <silent>gdi :Gdiffsplit@<CR>
-nnoremap <silent>sp :Commands<CR>
-nnoremap <silent>sf :Files<CR>
-nnoremap <silent>sm :Marks<CR>
-nnoremap <silent>sg :Rg!<CR>
-nnoremap <silent>sj :Buffers<CR>
-nnoremap <silent>sl :Lines<CR>
-nnoremap <silent>sc :Commits<CR>
-tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-let g:fzf_preview_window = []
-let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.4 } }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" neoclide/coc.nvim {{{
+let g:coc_global_extensions = [
+      \  'coc-lists'
+      \, 'coc-git'
+      \, 'coc-diagnostic'
+      \, 'coc-tabnine'
+      \, 'coc-word'
+      \, 'coc-yank'
+      \, 'coc-pairs'
+      \, 'coc-tsserver'
+      \, 'coc-snippets'
+      \, 'coc-highlight'
+      \, 'coc-prettier'
+      \, 'coc-eslint'
+      \, 'coc-html'
+      \, 'coc-css'
+      \, 'coc-emmet'
+      \, 'coc-go'
+      \, 'coc-lua'
+      \, 'coc-sh'
+      \, 'coc-vimlsp'
+      \, ]
+
+nnoremap <silent>s: :CocCommand<CR>
+nnoremap <silent>s; :<C-u>CocList<cr>
+nnoremap <silent>K :call <SID>show_documentation()<CR>
+nnoremap <silent>gd :CocCommand git.showCommit<CR>
+nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
+nnoremap <silent><C-n> :CocCommand explorer --sources=file+ --width=45<CR>
+nnoremap <silent><C-w>n :CocCommand explorer --sources=file+ --position=floating --floating-width=10000 --floating-height=10000<CR>
+nnoremap <C-p> :CocList gfiles<CR>
+nnoremap sj :CocList buffers<CR>
+nnoremap sp :CocList vimcommands<CR>
+nnoremap sf :CocList files<CR>
+nnoremap sg :CocList grep<CR>
+nnoremap sy :CocList yank<CR>
+nnoremap sc :CocList commits<CR>
+nnoremap sb :CocList bcommits<CR>
+nnoremap gs :CocList gstatus<CR>
+nnoremap so :CocList outline<CR>
+nnoremap s' :CocList cmdhistory<CR>
+nmap sd <Plug>(coc-definition)
+nmap sq <Plug>(coc-fix-current)
+nmap st <Plug>(coc-type-definition)
+nmap sh <Plug>(coc-references)
+nmap si <Plug>(coc-format)
+nmap sq <Plug>(coc-diagnostic)
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
+nmap gjc <Plug>(coc-git-keepcurrent)
+nmap gjn <Plug>(coc-git-keepincoming)
+nmap gjb <Plug>(coc-git-keepboth)
+
+xmap <leader>f  <Plug>(coc-format-selected)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <c-space> coc#refresh()
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 "}}}
 Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
 " tpope/vim-commentary {{{
@@ -91,6 +172,9 @@ let g:grepper.tools = ['rg', 'git', 'ag']
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 call plug#end()
+
+" colors
+colorscheme gruvbox
 
 " mappings
 noremap ; :
