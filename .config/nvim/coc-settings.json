@@ -29,7 +29,16 @@
   "diagnostic-languageserver.enable": true,
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
-    "sh": "shellcheck",
+    "sh": "shellcheck"
+  },
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
   },
   "diagnostic-languageserver.formatters": {
     "clang-format": {
