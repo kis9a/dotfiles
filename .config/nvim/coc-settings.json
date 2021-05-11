@@ -31,6 +31,15 @@
     "vim": "vint",
     "sh": "shellcheck"
   },
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  },
   "diagnostic-languageserver.formatters": {
     "clang-format": {
       "command": "clang-format"
