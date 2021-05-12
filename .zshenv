@@ -13,6 +13,7 @@ export LESS_TERMCAP_so=$'\E[30;43m'
 
 # dir
 export PROFILE=$HOME/kis9a
+export PRIVATE=$HOME/pkis9a
 export MEMOS=$PROFILE/memos
 export TASKS=$PROFILE/tasks
 export TASK=$PROFILE/tasks/$(date +%Y)/$(date +%m).md
