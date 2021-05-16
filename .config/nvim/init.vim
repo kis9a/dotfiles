@@ -368,8 +368,9 @@ nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
-nnoremap <silent> <Leader>m :tabnew<CR>:CocCommand explorer ~/kis9a/memos/<CR>/
-nnoremap <silent> <Leader>p :tabnew<CR>:e $PRIVATE<CR>:CocCommand explorer ~/pkis9a/memos/<CR>/
+nnoremap <silent> <Leader>m :tabnew<CR>:CocCommand explorer ~/kis9a/memos/<CR>
+nnoremap <silent> <Leader>s :tabnew<CR>:CocCommand explorer ~/kis9a/snippets/<CR>
+nnoremap <silent> <Leader>p :tabnew<CR>:e $PRIVATE<CR>:CocCommand explorer ~/pkis9a/memos/<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}
@@ -505,7 +506,7 @@ endif
 
 " }}}
 
-au BufWritePost *.lua,*.conf :!nginx -s reload
+" au BufWritePost *.lua,*.conf :!nginx -s reload
 
 function! s:cnl()
   let line = line(".")
