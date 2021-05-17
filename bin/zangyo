@@ -1,0 +1,19 @@
+if [ "$1" == "" ]; then
+        echo "引数に何日前からのチェックを開始するか指定してください\n例）sh checkOvertime.sh 30"
+        exit 1
+fi
+
+DATE=$(date -v -"$1"d "+%Y/%m/%d")
+echo "$(git config user.name) の $DATE 以降の残業コミット一覧\n"
+
+for (( i = "$1"; i >= 0; i-- )); do
+        DATE=$(date -v -"$i"d "+%Y/%m/%d")
+        LOG=$(git log --pretty=format:"%h %ad %s" --date=format:'%H:%M' --since="$DATE 19:30:00" --until="$DATE 23:59:59" --author="$(git config user.name)" | sort -k2)
+
+        if [[ $LOG == "" ]]; then
+                continue
+        fi
+
+        echo "[$DATE]"
+        echo "$LOG\n"
+done
