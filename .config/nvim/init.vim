@@ -24,6 +24,7 @@ set novisualbell
 set number relativenumber
 set redrawtime=10000
 set regexpengine=1
+set showmatch
 set shiftwidth=2
 set shortmess+=c
 set showtabline=2
@@ -301,6 +302,7 @@ nnoremap ge :WinResizerStartResize<CR>
 " }}}
 Plug 'honza/vim-snippets'
 Plug 'akinsho/nvim-toggleterm.lua'
+Plug 'high-moctane/gaming.vim'
 call plug#end()
 " toggleterm, vim-treesitter {{{
 lua <<EOF
@@ -507,6 +509,8 @@ endif
 " }}}
 
 " au BufWritePost *.lua,*.conf :!nginx -s reload
+au BufWritePost *.js,*.inc :!brew services restart httpd
+au BufWritePost *.scss :!node-sass ~/dev/infrabuilder/webroot/scss/ -o ~/dev/infrabuilder/webroot/css/
 
 function! s:cnl()
   let line = line(".")

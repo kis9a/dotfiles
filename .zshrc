@@ -55,6 +55,12 @@ _vcs_precmd () { vcs_info }
 add-zsh-hook precmd _vcs_precmd
 PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
+# cursor
+precmd_functions+=(_fix_cursor)
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+
 # bindkey
 bindkey -v
 bindkey -s '^v' 'nvim .^M'
