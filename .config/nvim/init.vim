@@ -24,6 +24,7 @@ set novisualbell
 set number relativenumber
 set redrawtime=10000
 set regexpengine=1
+set showmatch
 set shiftwidth=2
 set shortmess+=c
 set showtabline=2
