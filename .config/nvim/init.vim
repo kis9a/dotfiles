@@ -221,7 +221,7 @@ map , <Plug>(easymotion-overwin-f)
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
-Plug 'chr4/nginx.vim'
+Plug 'chr4/nginx.vim', { 'for': 'conf' }
 Plug 'hashivim/vim-terraform', { 'for': ['tf', 'tfvars'] }
 "hashivim/vim-terraform"{{{
 let g:terraform_fmt_on_save=1
@@ -303,6 +303,8 @@ nnoremap ge :WinResizerStartResize<CR>
 Plug 'honza/vim-snippets'
 Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'high-moctane/gaming.vim'
+Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
+Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
 call plug#end()
 " toggleterm, vim-treesitter {{{
 lua <<EOF
@@ -509,7 +511,7 @@ endif
 " }}}
 
 " au BufWritePost *.lua,*.conf :!nginx -s reload
-au BufWritePost *.js,*.inc :!brew services restart httpd
+" au BufWritePost *.js,*.inc :!brew services restart httpd
 au BufWritePost *.scss :!node-sass ~/dev/infrabuilder/webroot/scss/ -o ~/dev/infrabuilder/webroot/css/
 
 function! s:cnl()
