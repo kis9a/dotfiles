@@ -20,8 +20,8 @@ alias l='tree -a -C -h -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l1='tree -a -C -h -L 1 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l2='tree -a -C -h -L 2 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l3='tree -a -C -h -L 3 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
-alias j="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-alias m="(cd $MEMOS; fd -t f -d 3 | fzf --preview 'bat --style=numbers --color=always --line-range :500 {}')"
+alias j="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs bat -n"
+alias m="(cd $MEMOS; fd -t f -d 3 | fzf --preview 'bat --style=numbers --color=always --line-range :500 {}') | xargs -I {} bat $MEMOS/{} -n"
 alias mem="top -l 1 | grep Mem"
 alias path='echo $PATH | tr ":" "\n"'
 alias tzsh='time  zsh -i -c exit'

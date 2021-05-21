@@ -280,7 +280,7 @@ let g:silicon = {
       \  'window-controls':       v:true,
       \ }
 
-let g:silicon['output'] = '~/images/silicon-{time:%Y-%m-%d-%H%M%S}.png'
+let g:silicon['output'] = '~/Desktop/silicon-{time:%H%M%S}.png'
 "}}}
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 " liuchengxu/vista.vim {{{
@@ -305,6 +305,7 @@ Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'high-moctane/gaming.vim'
 Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
 Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
+Plug 'machakann/vim-sandwich'
 call plug#end()
 " toggleterm, vim-treesitter {{{
 lua <<EOF
@@ -356,6 +357,7 @@ nnoremap s "_s
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap == gg=G''
+nnoremap sl /
 nnoremap z0 zt
 nnoremap gF <C-w>gF
 nnoremap ss :sp<CR>
@@ -366,6 +368,7 @@ nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
 nnoremap <silent> <Leader>h :noh<CR>
+nnoremap <silent> <Leader>s :noa w<CR>
 nnoremap <silent> <C-w><C-q> :%bd<CR>
 nnoremap <Leader>rg :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
@@ -373,7 +376,7 @@ nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>m :tabnew<CR>:CocCommand explorer ~/kis9a/memos/<CR>
-nnoremap <silent> <Leader>s :tabnew<CR>:CocCommand explorer ~/kis9a/snippets/<CR>
+" nnoremap <silent> <Leader>s :tabnew<CR>:CocCommand explorer ~/kis9a/snippets/<CR>
 nnoremap <silent> <Leader>p :tabnew<CR>:e $PRIVATE<CR>:CocCommand explorer ~/pkis9a/memos/<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
