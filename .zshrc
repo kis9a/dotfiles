@@ -107,8 +107,7 @@ source ~/.aliases;
 export PATH="/usr/local/opt/php@7.2/bin:$PATH"
 export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 export PATH="/usr/local/Cellar/php@7.2/7.2.34_3/bin:$PATH"
-
-php_log_path="~/Logs/php_error.log"
+export php_log_path="$HOME/Logs/php_error.log"
 
 function plog() {
 	if $1 = 'clear'
