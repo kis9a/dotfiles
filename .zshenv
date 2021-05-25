@@ -18,6 +18,7 @@ export MEMOS=$PROFILE/memos
 export SNIPPETS=$PROFILE/snippets
 export TASKS=$PROFILE/tasks
 export TASK=$PROFILE/tasks/$(date +%Y)/$(date +%m).md
+export BOX=$TASKS/box.md
 export HISTORY=$HOME/.zsh_history
 export MYVIMRC=$HOME/dotfiles/.config/nvim/init.vim
 export DOTFILES=$HOME/dotfiles
@@ -33,3 +34,5 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
+
+export INFRA_ENVS_DIR=/Users/evolany36/dev/any/infra/infra/envs/
