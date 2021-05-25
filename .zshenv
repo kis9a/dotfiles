@@ -18,6 +18,7 @@ export MEMOS=$PROFILE/memos
 export SNIPPETS=$PROFILE/snippets
 export TASKS=$PROFILE/tasks
 export TASK=$PROFILE/tasks/$(date +%Y)/$(date +%m).md
+export BOX=$TASKS/box.md
 export HISTORY=$HOME/.zsh_history
 export MYVIMRC=$HOME/dotfiles/.config/nvim/init.vim
 export DOTFILES=$HOME/dotfiles
