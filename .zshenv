@@ -34,3 +34,5 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
+
+export INFRA_ENVS_DIR=/Users/evolany36/dev/any/infra/infra/envs/
