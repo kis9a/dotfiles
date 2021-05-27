@@ -35,4 +35,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
 
-export INFRA_ENVS_DIR=/Users/evolany36/dev/any/infra/infra/envs/
+export INFRABUILDER_ENVS_DIR=$HOME/dev/any/infra/infra/envs
+export INFRABUILDER_MODULES_DIR=$HOME/dev/any/infra/infra/modules
+export INFRABUILDER_CLI_DIR=$HOME/dev/go/src/infra
+export INFRABUILDER_DEFAULT_ENV_JSON=$INFRABUILDER_CLI_DIR/default.env.json
