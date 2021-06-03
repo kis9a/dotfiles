@@ -306,6 +306,7 @@ Plug 'high-moctane/gaming.vim'
 Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
 Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
 Plug 'machakann/vim-sandwich'
+Plug 'rhysd/vim-syntax-christmas-tree'
 call plug#end()
 " toggleterm, vim-treesitter {{{
 lua <<EOF
@@ -514,25 +515,6 @@ endif
 
 " }}}
 
-" au BufWritePost *.lua,*.conf :!nginx -s reload
-" au BufWritePost *.js,*.inc :!brew services restart httpd
-au BufWritePost *.scss :!node-sass ~/dev/infrabuilder/webroot/scss/ -o ~/dev/infrabuilder/webroot/css/
-
-function! s:cnl()
-  let line = line(".")
-  let path = execute("echo expand('%:p')")
-  let dir = system("dirname " . "'" . path . "'")
-  if executable('git')
-    let cmd = "( cd " . dir . "; git blame -L " . line . "," . line . " '" . path . "' )"
-    " echo cmd
-    echo substitute(cmd, "\n$", '', '')
-    let blamestr = system(cmd)
-    " echo blamestr
-  endif
-endfunction
-
-nnoremap <silent> <Leader>c :call <SID>cnl()<CR>
-
 " statusline
 set noshowmode
 set noruler
@@ -574,3 +556,7 @@ for i in reverse(filter(files, 'filereadable(v:val)'))
   source `=i`
 endfor
 endfunction
+
+if empty(glob("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
