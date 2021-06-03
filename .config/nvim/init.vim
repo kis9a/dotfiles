@@ -306,6 +306,7 @@ Plug 'high-moctane/gaming.vim'
 Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
 Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
 Plug 'machakann/vim-sandwich'
+Plug 'rhysd/vim-syntax-christmas-tree'
 call plug#end()
 " toggleterm, vim-treesitter {{{
 lua <<EOF
