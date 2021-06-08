@@ -246,8 +246,8 @@ key_bindings:
 
 colors:
   primary:
-    # background: "0x1d2021"
-    background: "0x000000"
+    background: "0x1d2021"
+    # background: "0x000000"
     # foreground: "0xebdbb3"
     foreground: "0xebcfb2"
   normal:
