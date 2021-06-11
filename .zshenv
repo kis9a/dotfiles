@@ -28,6 +28,7 @@ export DEV=$HOME/dev
 export PATH=$HOME/bin:"$PATH"
 
 # go
+export GO111MODULE=on
 export GOPATH=$HOME/dev/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
@@ -35,4 +36,6 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
 
-export INFRABUILDER=$HOME/dev/go/src/infrabuilder
+export INFRABUILDER=$HOME/dev/any/infrabuilder
+export PATH=$INFRABUILDER/infra/cmd:"$PATH"
+export PATH=$PROFILE/sources/cmd:"$PATH"
