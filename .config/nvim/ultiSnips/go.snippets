@@ -163,11 +163,11 @@ if ${1:condition} {
 endsnippet
 
 # else snippet
-snippet else
-else {
-	${0:${VISUAL}}
-}
-endsnippet
+# snippet else
+# else {
+# 	${0:${VISUAL}}
+# }
+# endsnippet
 
 # if inline error
 snippet ife "If with inline error"
@@ -207,7 +207,14 @@ ${0}
 endsnippet
 
 # error log snippet
-snippet errl "Error with log.Fatal(err)" !b
+snippet el "Error with log.Fatal(err)" !b
+if err != nil {
+	log.Fatal(err)
+}
+${0}
+endsnippet
+
+snippet ef "Error with log.Fatal(err)" !b
 if err != nil {
 	log.Fatal(err)
 }
@@ -357,12 +364,23 @@ if ${1:${VISUAL:err}} != nil {
 endsnippet
 
 # log printf
-snippet lf "log.Printf(...)"
+snippet lp "log.Printf(...)"
 log.Printf("${1:${VISUAL}} = %+v\n", $1)
 endsnippet
 
-snippet lfe "log.Fatal(err)"
+snippet lf "log.Fatal(err)"
 log.Fatal(err)
+endsnippet
+
+snippet re: "return err"
+return err
+endsnippet
+
+snippet er "if err != nil { t.Errorf(...) }"
+if err != nil {
+	return err
+}
+${0:${VISUAL}}
 endsnippet
 
 # log println

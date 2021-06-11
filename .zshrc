@@ -53,7 +53,7 @@ zstyle ':vcs_info:*' actionformats '%b|%a'
 precmd () { vcs_info; precmd() { echo } }
 _vcs_precmd () { vcs_info }
 add-zsh-hook precmd _vcs_precmd
-PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
+PROMPT='%F{160}< %~%f${vcs_info_msg_0_} %F{160}>%f '
 
 # cursor
 precmd_functions+=(_fix_cursor)
@@ -120,5 +120,3 @@ function plog() {
 
 export HTTP_ROOT_DIR=~/dev
 export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
-export LUA_PATH='/Users/evolany16/.luarocks/share/lua/5.1/?.lua;/Users/evolany16/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua'
-export LUA_CPATH='/Users/evolany16/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/local/lib/lua/5.1/loadall.so'

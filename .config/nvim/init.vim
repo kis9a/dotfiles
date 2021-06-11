@@ -300,7 +300,7 @@ Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResi
 let g:winresizer_start_key = 'ge'
 nnoremap ge :WinResizerStartResize<CR>
 " }}}
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'high-moctane/gaming.vim'
 Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
@@ -560,3 +560,12 @@ endfunction
 if empty(glob("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+xnoremap * :<c-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<c-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+function! s:VSetSearch()
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction

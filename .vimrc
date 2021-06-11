@@ -19,6 +19,7 @@ set noerrorbells
 set noruler
 set noswapfile
 set novisualbell
+set noshowmode
 set nowritebackup
 set number relativenumber
 set redrawtime=10000
@@ -42,6 +43,10 @@ set backspace=indent,eol,start
 "}}}
 
 " variables"{{{
+let &t_ti .= "\e[1 q"
+let &t_SI .= "\e[5 q"
+let &t_EI .= "\e[1 q"
+let &t_te .= "\e[0 q"
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:currentmode={
@@ -87,6 +92,7 @@ Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'skanehira/beatbanana.vim'
 call plug#end()
 "}}}
 
@@ -130,7 +136,6 @@ inoremap <C-b> <Esc>bi
 inoremap <C-e> <Esc>ea
 inoremap <C-f> <C-y>
 inoremap <C-i> <C-y>
-inoremap <C-]> <Esc><Right>
 inoremap <C-]> <Esc><Right>
 inoremap <C-u> <Esc>ui
 xnoremap > >gv
