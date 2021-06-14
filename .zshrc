@@ -33,16 +33,11 @@ autoload -Uz vcs_info
 
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit ice depth=1
-# zinit light jeffreytse/zsh-vi-mode
 zinit light zsh-users/zsh-autosuggestions
 zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
-
-# function zvm_after_init() {
-  zinit light zsh-users/zsh-history-substring-search
-  zinit light zdharma/history-search-multi-word
-# }
-zvm_after_init_commands+=(zvm_after_init)
+zinit light zsh-users/zsh-history-substring-search
+zinit light zdharma/history-search-multi-word
 
 # prompt
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -117,6 +112,5 @@ function plog() {
 		printf "\033c" && tail -n 1000 -f $php_log_path
 	fi
 }
-
 export HTTP_ROOT_DIR=~/dev
 export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH

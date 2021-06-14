@@ -160,7 +160,10 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
+if has('nvim')
+  command! -nargs=* Term split | terminal <args>
+  command! -nargs=* Termv vsplit | terminal <args>
+endif
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 inoremap <silent><expr> <TAB>
@@ -214,10 +217,11 @@ Plug 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
 let g:indentLine_char_list = ['¦', '┆', '┊']
 "}}}
-Plug 'easymotion/vim-easymotion'
-" easymotion/vim-easymotion{{{
-map , <Plug>(easymotion-overwin-f)
-"}}}
+"Plug 'easymotion/vim-easymotion'
+"" easymotion/vim-easymotion{{{
+"map , <Plug>(easymotion-overwin-f)
+""}}}
+Plug 'phaazon/hop.nvim', { 'branch': 'pre-extmarks' }
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
@@ -307,11 +311,13 @@ Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
 Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
 Plug 'machakann/vim-sandwich'
 Plug 'rhysd/vim-syntax-christmas-tree'
+Plug 'yuzoiwasaki/fluentd.vim'
+" Plug '~/dotfiles/.config/nvim/plugged/vim-gtd'
 call plug#end()
-" toggleterm, vim-treesitter {{{
+" lua eof {{{
 lua <<EOF
 require"toggleterm".setup{
-  size = 15,
+  size = 50,
   open_mapping = [[<c-t>]],
   shade_filetypes = {},
   shade_terminals = true,
@@ -328,8 +334,26 @@ require'nvim-treesitter.configs'.setup {
   },
   ensure_installed = 'maintained'
 }
+vim.api.nvim_set_keymap('n', ',', "<cmd>lua require'hop'.hint_char1()<cr>", {})
 EOF
 "}}}
+"}}}
+
+"Plug 'phaazon/hop.nvim' - highlight {{{
+highlight HopNextKey guifg=#ff0000 gui=bold ctermfg=9 cterm=bold
+highlight HopNextKey1 guifg=#fe8019 guibg=#262b35 gui=bold ctermfg=208 cterm=bold
+highlight HopNextKey2 guifg=#d65d0e guibg=#262b35 ctermfg=166
+"}}}
+
+" toggleterm{{{
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><c-t> <C-\><C-n>:exe v:count1 . "ToggleTerm"<CR>
+
+" By applying the mappings this way you can pass a count to your
+" mapping to open a specific window.
+" For example: 2<C-t> will open terminal 2
+nnoremap <silent><c-t> :<c-u>exe v:count1 . "ToggleTerm"<CR>
+inoremap <silent><c-t> <Esc>:<c-u>exe v:count1 . "ToggleTerm"<CR>
 "}}}
 
 " Colors {{{
@@ -557,7 +581,7 @@ for i in reverse(filter(files, 'filereadable(v:val)'))
 endfor
 endfunction
 
-if empty(glob("~/.vimrc.local"))
+if !empty(glob("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
