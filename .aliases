@@ -69,10 +69,6 @@ alias gst-untracked="git status --short | grep '^??'"
 alias gste="gst-staged | awk '{ print $2}' | xargs nvim -p"
 alias grget='git remote get-url origin'
 
-function ggrep() {
-  git grep -h $1 $(git rev-list --all)
-}
-
 # docker
 alias dk='docker'
 alias dkp='docker ps'

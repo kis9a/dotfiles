@@ -70,6 +70,7 @@ bindkey '^B' backward-char
 bindkey '^E' forward-char
 bindkey '^D' backward-delete-char
 
+# functions
 function f() {
   dir=$(fd -t d -d 3 | fzf)
   if [ "$(echo $dir)" ]; then
@@ -93,17 +94,6 @@ function fzf-z-search() {
     fi
 }
 
-zle -N fzf-z-search
-bindkey '^j' fzf-z-search
-# alias
-source ~/.aliases;
-
-# envs
-export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
-export PATH="/usr/local/Cellar/php@7.2/7.2.34_3/bin:$PATH"
-export php_log_path="$HOME/Logs/php_error.log"
-
 function plog() {
 	if $1 = 'clear'
 	then
@@ -112,5 +102,25 @@ function plog() {
 		printf "\033c" && tail -n 1000 -f $php_log_path
 	fi
 }
+
+function ggrep() {
+  if [[ $2 == "-h" ]]; then
+    git grep -h $1 $(git rev-list --all)
+  else
+    git grep $1 $(git rev-list --all)
+  fi
+}
+
+zle -N fzf-z-search
+bindkey '^j' fzf-z-search
+
+# alias
+source ~/.aliases;
+
+# envs
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+export PATH="/usr/local/Cellar/php@7.2/7.2.34_3/bin:$PATH"
+export php_log_path="$HOME/Logs/php_error.log"
 export HTTP_ROOT_DIR=~/dev
 export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
