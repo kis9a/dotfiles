@@ -1,8 +1,8 @@
 " Settings {{{
 set autochdir
 set autoindent
-set clipboard+=unnamedplus
 set clipboard=unnamed
+set clipboard+=unnamedplus
 set cursorline
 set encoding=UTF-8
 set expandtab
@@ -312,12 +312,13 @@ Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
 Plug 'machakann/vim-sandwich'
 Plug 'rhysd/vim-syntax-christmas-tree'
 Plug 'yuzoiwasaki/fluentd.vim'
+Plug 'peterlundgren/vim-todo'
 " Plug '~/dotfiles/.config/nvim/plugged/vim-gtd'
 call plug#end()
 " lua eof {{{
 lua <<EOF
 require"toggleterm".setup{
-  size = 50,
+  size = 100,
   open_mapping = [[<c-t>]],
   shade_filetypes = {},
   shade_terminals = true,
@@ -354,6 +355,8 @@ autocmd TermEnter term://*toggleterm#*
 " For example: 2<C-t> will open terminal 2
 nnoremap <silent><c-t> :<c-u>exe v:count1 . "ToggleTerm"<CR>
 inoremap <silent><c-t> <Esc>:<c-u>exe v:count1 . "ToggleTerm"<CR>
+nnoremap <silent><c-w>t :ToggleTermOpenAll<CR>
+nnoremap <silent><c-w>T :ToggleTermCloseAll<CR>
 "}}}
 
 " Colors {{{
@@ -493,6 +496,31 @@ nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
+" Statusline{{{
+set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
+let s:hidden_all = 1
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <Leader>k :call ToggleHiddenAll()<CR>
+"}}}
+
 " Functions {{{
 " Trailing {{{
 command! Date :r!date "+\%F"
@@ -537,32 +565,6 @@ if exists("g:netrw_usetab") && g:netrw_usetab
 endif
 " }}}
 
-" }}}
-
-" statusline
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
-let s:hidden_all = 1
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-
-nnoremap <Leader>k :call ToggleHiddenAll()<CR>
-
 if exists('$TMUX')
   let dir = fnamemodify(getcwd(), ":t")
   autocmd BufEnter,FocusGained * call system("tmux rename-window " . dir)
@@ -593,3 +595,57 @@ function! s:VSetSearch()
   let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
   let @s = temp
 endfunction
+
+function! s:openGitRemote()
+  let uri = system("git remote get-url origin")
+  silent execute "!open " . uri
+endfunction
+nnoremap <silent> <Leader>gr :call <SID>openGitRemote()<CR>
+
+function! s:gitHubSearch()
+  let cw = expand("<cword>")
+  let uri = "'https://github.com/search?q=language:" . &filetype . "+" . cw . "'"
+  silent execute "!open " . uri
+endfunction
+nnoremap <silent> <Leader>gw :call <SID>gitHubSearch()<CR>
+
+function! s:githubSearchFile()
+  let fname = expand('%:t')
+  let uri = "'https://github.com/search?q=filename:" . fname ."'"
+  silent execute "!open " . uri
+endfunction
+nnoremap <silent> <Leader>gf :call <SID>GithubSearchFile()<CR>
+
+function! s:getVisualSelection() range
+    let s = @a
+    silent! normal! gv"ay
+    let r = @a
+    let @a = s
+    return r
+endfunction
+xnoremap <Leader>g :call <SID>getVisualSelection()<cr>
+
+function! s:getUserInput()
+  echohl Question
+  call inputsave()
+  let input=input("word > ")
+  echohl NONE
+  call inputrestore()
+  echo "\n"
+  return input
+endfunction
+
+function! s:googleSearch()
+  let vs = s:getUserInput()
+  let uri = "'https://www.google.com/search?q=" . vs . "'"
+  silent execute "!open " . uri
+endfunction
+nnoremap <silent> <Leader>gi :call <SID>googleSearch()<CR>
+
+function! s:googlesearchcwrod()
+  let cw = expand("<cword>")
+  let uri = "'https://www.google.com/search?q=" . cw . "'"
+  silent execute "!open " . uri
+endfunction
+nnoremap <silent> <Leader>gg :call <SID>googleSearchCword()<CR>
+" }}}
