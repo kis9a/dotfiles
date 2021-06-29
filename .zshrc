@@ -94,6 +94,15 @@ function fzf-z-search() {
     fi
 }
 
+function zf() {
+  local dir=$(z | sort -rn | cut -c 12- | fzf)
+  if [ -n "$dir" ]; then
+    cd $dir
+  else
+    return 1
+  fi
+}
+
 function plog() {
 	if $1 = 'clear'
 	then

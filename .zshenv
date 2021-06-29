@@ -37,5 +37,5 @@ source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
 
 export INFRABUILDER=$HOME/dev/any/infrabuilder
-export PATH=$INFRABUILDER/infra/cmd:"$PATH"
+export PATH=$INFRABUILDER/cmd:"$PATH"
 export PATH=$PROFILE/sources/cmd:"$PATH"

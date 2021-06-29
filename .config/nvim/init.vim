@@ -41,6 +41,7 @@ set ttimeoutlen=0
 set updatetime=300
 set viminfo="NONE"
 set virtualedit=block
+set list lcs=tab:\|\  
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
@@ -408,7 +409,8 @@ nnoremap <silent> <Leader>b :tabnew<CR>:e $BOX<CR>
 " nnoremap <silent> <Leader>s :tabnew<CR>:CocCommand explorer ~/kis9a/snippets/<CR>
 nnoremap <silent> <Leader>p :tabnew<CR>:e $PRIVATE<CR>:CocCommand explorer ~/pkis9a/memos/<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
-nnoremap <silent> <Leader>o :set spell!<CR>
+nnoremap <silent> <Leader>o :<C-u>call append(expand('.'), '')<Cr>j
+nnoremap <silent> <Leader>O :k<C-u>call append(expand('.'), '')<Cr>j
 " }}}
 
 " --- nnoremap! ---{{{
