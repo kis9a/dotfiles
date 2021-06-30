@@ -310,11 +310,6 @@ Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'high-moctane/gaming.vim'
 Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
 Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
-Plug 'machakann/vim-sandwich'
-Plug 'rhysd/vim-syntax-christmas-tree'
-Plug 'yuzoiwasaki/fluentd.vim'
-Plug 'peterlundgren/vim-todo'
-" Plug '~/dotfiles/.config/nvim/plugged/vim-gtd'
 call plug#end()
 " lua eof {{{
 lua <<EOF

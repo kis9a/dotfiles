@@ -1,3 +1,4 @@
+# set
 setopt no_beep
 setopt nolistbeep
 setopt auto_cd
@@ -123,13 +124,136 @@ function ggrep() {
 zle -N fzf-z-search
 bindkey '^j' fzf-z-search
 
-# alias
-source ~/.aliases;
+function pkill () {
+  lsof -i :$1 | awk '{l=$2} END {print l}' | xargs kill
+}
 
-# envs
-export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
-export PATH="/usr/local/Cellar/php@7.2/7.2.34_3/bin:$PATH"
-export php_log_path="$HOME/Logs/php_error.log"
-export HTTP_ROOT_DIR=~/dev
-export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
+function pss () {
+  ps aux | grep -E "PID|$1" | grep -v grep
+}
+
+function mk () {
+  mkdir $1; cd $1;
+}
+
+function colors() {
+  for i in {0..255}
+  do
+      print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}
+  done
+}
+
+# alias
+alias a='alias'
+alias b='bat'
+alias o='open'
+alias v='nvim'
+alias d='cd $DEV'
+alias n='cd $PROFILE'
+alias p='cd $PRIVATE'
+alias .='cd $DOTFILES;'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias rmi='rm -i'
+alias rmf='rm -fr'
+alias sl='ls -lahGpt'
+alias t='tmux -u new -s $(basename `pwd`)'
+alias ta='tmux a'
+alias tkw='tmux kill-server'
+alias pp=pbpaste
+alias l='tree -a -C -h -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias l1='tree -a -C -h -L 1 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias l2='tree -a -C -h -L 2 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias l3='tree -a -C -h -L 3 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias j="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs bat -n"
+alias m="(cd $MEMOS; fd -t f -d 3 | fzf --preview 'bat --style=numbers --color=always --line-range :500 {}') | xargs -I {} bat $MEMOS/{} -n"
+alias mem="top -l 1 | grep Mem"
+alias path='echo $PATH | tr ":" "\n"'
+alias tzsh='time  zsh -i -c exit'
+alias porta='lsof -Pan -i tcp -i udp'
+
+# global
+alias -g C='| pbcopy'
+alias -g G='| grep --color=auto'
+alias -g H='| head -c'
+alias -g L='| less -R'
+alias -g B='| bat'
+alias -g X='| xargs'
+alias -g F='| fzf'
+alias -g N='| nvim -'
+alias -g P='| curl -s -T - https://ppng.io/kis9a'
+
+# git
+alias g='git'
+alias ga='git add'
+alias gs='git status -s'
+alias gd='git diff'
+alias gd@='git diff @'
+alias gsta='git stash'
+alias gsu='git submodule'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit --am'
+alias gr='git reset'
+alias gch='git checkout'
+alias gchb='git checkout -b'
+alias gp='git push'
+alias gpf='git push -f'
+alias gpl='git pull'
+alias gf='git fetch'
+alias gb='git branch'
+alias gcl='git clone'
+alias gcu='git config --global --list | HEAD -n 3'
+alias gclr='git clone --recurse-submodules'
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -10"
+alias gll='git log --graph --oneline --decorate --all'
+alias gst-staged="git status --short | grep '^\w.'"
+alias gst-unstaged="git status  --short | grep '^\W.'"
+alias gst-unstaged-tracked="git status  --short | grep '^\s.'"
+alias gst-untracked="git status --short | grep '^??'"
+alias gste="gst-staged | awk '{ print $2}' | xargs nvim -p"
+alias grget='git remote get-url origin'
+
+# docker
+alias dk='docker'
+alias dkp='docker ps'
+alias dkpa='docker ps -a'
+alias dkpaq='docker ps -a -q'
+alias dkb='docker build'
+alias dkbnc='docker build --no-cache -t'
+alias dkr='docker run --rm'
+alias dkrti='docker run --rm -ti'
+alias dkrd='docker run -d'
+alias dkrp8='docker run --rm -p 8080:8080'
+alias dkrp9='docker run --rm -p 9080:9080'
+alias dks='docker start'
+alias dkt='docker stop'
+alias dktt='docker stop $(docker ps -q)'
+alias dkk='docker kill'
+alias dkkk='docker kill $(docker ps -q)'
+alias dkrm='docker rm'
+alias dkri='docker rmi'
+alias dke='docker exec -ti'
+alias dkl='docker logs -f'
+alias dki='docker images'
+alias dkpu='docker pull'
+alias dkph='docker push'
+alias dkin='docker inspect'
+alias dkn='docker network'
+alias dkc='docker-compose'
+alias dkcu='docker-compose up'
+alias dkclean='docker ps -q -a -f status=exited | xargs -r docker rm && docker images -q -f dangling=true | xargs -r docker rmi'
+
+# media
+alias te='trans {en=ja}'
+alias tj='trans {ja=en}'
+alias ffp='ffprobe -hide_banner -show_format'
+alias ffimg='ls *(.png|.jpg) | fzf -m --prompt="twimg" | xargs -I {} sips -Z 720 {}'
+alias ff2gif='ls *(.mp4|.mov) | fzf -m --prompt="tw2gif" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" -r 10 {}.gif'
+alias ffmov2mp4='ls *.mov | fzf -m --prompt="twmov2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
+alias ffgif2mp4='ls *.gif | fzf -m --prompt="gif2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
+alias yd='youtube-dl -ciw --restrict-filenames'
+alias ydd='youtube-dl -ciw --extract-audio --audio-format mp3 --restrict-filenames'
+alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias music="mpv --shuffle ~/lofi"
