@@ -32,10 +32,18 @@ export GO111MODULE=on
 export GOPATH=$HOME/dev/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
+
+# others
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
-
+export HTTP_ROOT_DIR=~/dev
 export INFRABUILDER=$HOME/dev/any/infrabuilder
 export PATH=$INFRABUILDER/cmd:"$PATH"
 export PATH=$PROFILE/sources/cmd:"$PATH"
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+export PATH="/usr/local/Cellar/php@7.2/7.2.34_3/bin:$PATH"
+export php_log_path="$HOME/Logs/php_error.log"
+export PATH=/usr/local/openresty/bin:/usr/local/openresty/nginx/sbin:$PATH
+
