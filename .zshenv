@@ -33,6 +33,10 @@ export GOPATH=$HOME/dev/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 
+# terraform
+export TF_LOG=DEBUG
+export TF_LOG_PATH="$HOME/Logs/terraform.log"
+
 # others
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 source "$HOME/.cargo/env"

@@ -293,7 +293,6 @@ nnoremap <Leader>v :Vista!!<CR>
 let g:vista_sidebar_width = 40
 let g:vista_default_executive = 'coc'
 " }}}
-Plug 'pocke/sushibar.vim', { 'on': 'Sushibar' }
 Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight!!' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -307,7 +306,6 @@ nnoremap ge :WinResizerStartResize<CR>
 " }}}
 " Plug 'honza/vim-snippets'
 Plug 'akinsho/nvim-toggleterm.lua'
-Plug 'high-moctane/gaming.vim'
 Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
 Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
 call plug#end()
@@ -595,7 +593,9 @@ endfunction
 
 function! s:openGitRemote()
   let uri = system("git remote get-url origin")
-  silent execute "!open " . uri
+  if !empty(uri)
+    silent execute "!open " . uri
+  end
 endfunction
 nnoremap <silent> <Leader>gr :call <SID>openGitRemote()<CR>
 
@@ -634,15 +634,46 @@ endfunction
 
 function! s:googleSearch()
   let vs = s:getUserInput()
-  let uri = "'https://www.google.com/search?q=" . vs . "'"
-  silent execute "!open " . uri
+  if !empty(vs)
+    let uri = "'https://www.google.com/search?q=" . vs . "'"
+    silent execute "!open " . uri
+  end
 endfunction
 nnoremap <silent> <Leader>gi :call <SID>googleSearch()<CR>
 
-function! s:googlesearchcwrod()
+function! s:googleSearchCword()
   let cw = expand("<cword>")
-  let uri = "'https://www.google.com/search?q=" . cw . "'"
-  silent execute "!open " . uri
+  if !empty(cw)
+    let uri = "'https://www.google.com/search?q=" . cw . "'"
+    silent execute "!open " . uri
+end
 endfunction
 nnoremap <silent> <Leader>gg :call <SID>googleSearchCword()<CR>
+
+function! s:getCurrent()
+" :echo @% 	def/my.txt	directory/name of file (relative to the current working directory of /abc)
+" :echo expand('%:t') 	my.txt	name of file ('tail')
+" :echo expand('%:p') 	/abc/def/my.txt	full path
+" :echo expand('%:p:h')	/abc/def	directory containing file ('head')
+" :echo expand('%:p:h:t')	def	First get the full path with :p (/abc/def/my.txt), then get the head of that with :h (/abc/def), then get the tail of that with :t (def)
+" :echo expand('%:r') 	def/my	name of file less one extension ('root')
+" :echo expand('%:e') 	txt	name of file's extension ('extension')
+endfunction
+
+function! s:getBuffers()
+  let all = range(0, bufnr('$'))
+  let res = []
+  for b in all
+    if buflisted(b)
+      call add(res, bufname(b))
+    endif
+  endfor
+  return res
+endfunction
+
+function! s:some()
+  let vs = s:getBuffers()
+  echo vs
+endfunction
+nnoremap <silent> <Leader>gu :call <SID>some()<CR>
 " }}}

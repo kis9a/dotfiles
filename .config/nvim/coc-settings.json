@@ -6,7 +6,7 @@
   "explorer.file.showHiddenFiles": true,
   "eslint.autoFixOnSave": true,
   "prettier.eslintIntegration": true,
-  "coc.source.word.filetypes": ["markdown", "text"],
+  "coc.source.word.filetypes": ["markdown", "text", ""],
   "coc.preferences.formatOnSaveFiletypes": ["php", "js"],
   "translator.toLang": "ja",
   "snippets.priority": 100,
