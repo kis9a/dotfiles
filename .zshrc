@@ -73,7 +73,7 @@ bindkey '^D' backward-delete-char
 
 # functions
 function f() {
-  dir=$(fd -t d -d 3 | fzf)
+  dir=$(fd -t d -d 3 | fzf --height 40%)
   if [ "$(echo $dir)" ]; then
     cd $dir
   fi
@@ -81,22 +81,56 @@ function f() {
 
 function ff() {
   baseDir=$DEV
-  dir=$(fd -t d --base-directory $baseDir -d 3 | fzf)
+  dir=$(fd -t d --base-directory $baseDir -d 3 | fzf --height 40%)
   cd $baseDir/$dir
 }
 
-function fzf-z-search() {
-    local res=$(z | sort -rn | cut -c 12- | fzf)
-    if [ -n "$res" ]; then
-        BUFFER+="cd $res"
-        zle accept-line
+function fshow() {
+  local out shas sha q k
+  while out=$(
+      git log --graph --color=always \
+          --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+      fzf --ansi --multi --no-sort --reverse --query="$q" \
+          --print-query --expect=ctrl-d --height 60%); do
+    q=$(head -1 <<< "$out")
+    k=$(head -2 <<< "$out" | tail -1)
+    shas=$(sed '1,2d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
+    [ -z "$shas" ] && continue
+    if [ "$k" = ctrl-d ]; then
+      git diff --color=always $shas | less -R
     else
-        return 1
+      for sha in $shas; do
+        git show --color=always $sha | less -R
+      done
     fi
+  done
+}
+
+function fb() {
+  local branches=$(git branch -vv) &&
+  local branch=$(echo "$branches" | fzf +m --height 40%) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+function fbr() {
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+function fzf-z-search() {
+  local res=$(z | sort -rn | cut -c 12- | fzf --height 40%)
+  if [ -n "$res" ]; then
+      BUFFER+="cd $res"
+      zle accept-line
+  else
+      return 1
+  fi
 }
 
 function zf() {
-  local dir=$(z | sort -rn | cut -c 12- | fzf)
+  local dir=$(z | sort -rn | cut -c 12- | fzf --height 40%)
   if [ -n "$dir" ]; then
     cd $dir
   else
@@ -257,3 +291,4 @@ alias yd='youtube-dl -ciw --restrict-filenames'
 alias ydd='youtube-dl -ciw --extract-audio --audio-format mp3 --restrict-filenames'
 alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
 alias music="mpv --shuffle ~/lofi"
+alias gdoc="echo http://localhost:6060 && GO111MODULE=off godoc --http=localhost:6060"
