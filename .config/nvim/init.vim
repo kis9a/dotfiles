@@ -551,4 +551,10 @@ function! s:openGitRemote()
   end
 endfunction
 nnoremap <silent> <Leader>gr :call <SID>openGitRemote()<CR>
+
+function! s:openProject()
+  let uri = "'https://github.com/users/kis9a/projects/1?fullscreen=true'"
+  silent execute "!open " . uri
+endfunction
+nnoremap <silent> <Leader>gj :call <SID>openProject()<CR>
 " }}}
